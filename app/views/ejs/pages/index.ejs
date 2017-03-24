@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="shortcut icon" href="img/favicon/chieveIcon.png?"/>
+		<title>CHIEVE | <%= title %></title>
+		<link rel="stylesheet" href="/css/landing.min.css">
+	</head>
+	<body>
+		<!-- Page 1 & 2 -->
+		<section class="parallax-container" id="title-container">
+			<div id="title-header-container" class="parallax-layer parallax-min">
+				<div class="inner-container">
+					<h1 class="text title-header">a&middot;chieve</h1>
+				</div>
+			</div>
+			<div id="title-secondary-container" class="parallax-layer parallax-max">
+				<div class="inner-container">
+					<h2 class="text title-pronounciation">/&#x0259;'CH&emacr;v/</h2>
+					<p class="text medium">verb</p>
+				</div>
+			</div>
+			<div id="title-description-container" class="parallax-layer parallax-mid">
+				<div class="inner-container">
+					<p id="title-fading-text" class="text medium no-margin-bottom scroll-fade-out">to reach or attain a desired objective by effort, skill, or courage.</p>
+					<p id="title-changing-text" class="text grey medium no-margin-top"></p>
+					<div id="title-input-text">
+						<p class="text grey medium no-margin-top">"You will</p>
+						<div class="input-line add-space">
+							<input id="first-goal" type="text" placeholder="type a goal here">
+						</div>
+						<p class="text grey medium no-margin-top">"</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Arrow from page 1 -->
+		<div id="landing-scroll-down-arrow" class="scroll-down-arrow bounce"></div>
+		<!-- Arrow from page 2 -->
+		<div id="landing-goal-scroll-right-arrow" ng-click="storeGoal(goal)">
+			<p class="text small">plan your next steps</p>
+			<div class="inner-container">
+				<div class="scroll-right-arrow"></div>
+			</div>
+		</div>
+		<!-- Page 3 -->
+		<section id="landing-task-list">
+			<h2 class="text medium">What tasks do you need to complete to reach <span class="text grey">{{ goal_store.title }}</span>?</h2>
+			<div data-ng-repeat="task in tasks_store">
+				<div class="task-container">
+					<div class="input-line">
+						<input type="text" placeholder="create a new task" ng-model="task.name" class="task-input" tabindex="-4">
+					</div>
+				</div>
+			</div>
+			<div class="add-button" ng-click="addNewTask()">
+				<div class="line-1"></div>
+				<div class="line-2"></div>
+			</div>
+		</section>
+		<div id="landing-task-scroll-right-arrow" ng-click="printTasks()">
+			<p class="text small">save your tasks</p>
+			<div class="inner-container">
+				<div class="scroll-right-arrow"></div>
+			</div>
+		</div>
+		<!-- Page 4 -->
+		<section id="landing-sign-up">
+			<h2 class="text medium">Sign up and begin achieving:</h2>
+			<div class="user-info-input">
+				<input type="email" placeholder="email" ng-model="user.email" tabindex="-1">
+				<div class="focus-effect-object"></div>
+			</div>
+			<div class="user-info-input">
+				<input type="password" placeholder="password" ng-model="user.pass" tabindex="-2">
+				<div class="focus-effect-object"></div>
+			</div>
+			<button class="round-button" ng-click="signUp(user)" tabindex="-3">GET STARTED</button>
+		</section>
+		<!-- Log-in Link -->
+		<a id="landing-sign-in-link" tabindex="-4" href="javascript:void(0)">SIGN IN</a>
+		<!-- Log-in Screen -->
+		<div id="landing-sign-in-overlay" class="black-overlay-expanding circle"></div>
+		<section id="landing-sign-in-container">
+			<a id="landing-sign-in-close" href="javascript:void(0)">CLOSE</a>
+			<h2 class="text landing-sign-in white">Let's get down to business</h2>
+			<div class="inner-container">
+				<div class="user-info-input white">
+					<input type="email" tabindex="-5" placeholder="email" ng-model="user.email">
+					<div class="focus-effect-object"></div>
+				</div>
+				<div class="user-info-input white">
+					<input type="password" tabindex="-6" placeholder="password" ng-model="user.pass">
+					<div class="focus-effect-object"></div>
+				</div>
+				<div class="flex">
+					<button class="round-button white-outline" tabindex="-7" ng-click="signIn(user)">SIGN IN</button>
+					<div class="error-message"></div>
+				</div>
+			</div>
+		</section>
+		<!--########## SCRIPTS ##########-->
+		<!--########## LIBRARIES ##########-->
+	    <!-- jQuery Library -->
+	    <script type="text/javascript" src="/js/lib/jquery.min.3.1.0/jquery.min.3.1.0.js"></script>
+	    <!--########## CUSTOM ##########-->
+	    <script src="/js/pages/landing.min.js"></script>
+		<!--script type="text/javascript" src="js/lib/fetch/fetch.js"></script-->
+	</body>
+</html>

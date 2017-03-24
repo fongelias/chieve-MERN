@@ -1,0 +1,603 @@
+/* READ ME */
+/*
+This file is used for site-wide CSS, namely reusable components, styles,
+helper classes, and states.
+*/
+
+/*--- Fonts ---*/
+	/*--- Serif ---*/
+	@font-face {
+		font-family: 'CrimsonText-Roman';
+		src: url('../fonts/Crimson_Text_WOFF/CrimsonText-Roman.WOFF') format('WOFF');
+	}
+
+	@font-face {
+		font-family: 'Amiri-Regular';
+		src: url('../fonts/Amiri_WOFF/Amiri-Regular.WOFF') format('WOFF');
+	}
+
+	/*--- Sans-serif ---*/
+	@font-face {
+		font-family:  'Rubik-Regular';
+		src: url('../fonts/Rubik_WOFF/Rubik-Regular.WOFF') format('WOFF');
+	}
+
+		@font-face {
+			font-family:  'Rubik-Medium';
+			src: url('../fonts/Rubik_WOFF/Rubik-Medium.WOFF') format('WOFF');
+		}
+
+	@font-face {
+		font-family:  'OpenSans-Regular';
+		src: url('../fonts/Open_Sans_WOFF/OpenSans-Regular.WOFF') format('WOFF');
+	}
+
+
+/*--- Text ---*/
+
+	/*--- Size ---*/
+	.text.small {
+		font-size: 1.6rem;
+	}
+
+	.text.medium {
+		font-size: 2.88rem;
+		font-weight: 100;
+	}
+
+	/*--- Colors ---*/
+	.text.grey {
+		color: #85888C;
+	}
+
+	.text.white {
+		color: #ffffff;
+	}
+
+	/*--- Margins ---*/
+	.text.no-margin-bottom{
+		margin-bottom: 0rem;
+	}
+
+	.text.no-margin-top{
+		margin-top: 0rem;
+	}
+
+
+/*--- Elements ---*/
+body {
+	font-family: 'Amiri-Regular';
+	overflow: hidden;
+}
+
+/*--- Flexbox ---*/
+.flex { /*Default Flexbox*/
+	display: flex;
+	flex-direction: row;
+}
+
+/*--- Overlays ---*/
+.black-overlay-expanding {
+	background-color: black;
+	position: fixed;
+	visibility: hidden;
+	height: 0rem;
+	width: 0rem;
+	opacity: 0;
+}
+
+.black-overlay-expanding.circle {
+	border-radius: 100%;
+}
+
+/*--- Icons ---*/
+	/*--- Checkmark ---*/
+	.checkmark {
+		height: 2rem;
+		width: 2rem;
+		position: absolute;
+	}
+
+	.checkmark::before {
+		content: "";
+		height: 1.4rem;
+		width: 0.4rem;
+		position: absolute;
+		top: 0.3rem;
+		right: 0.7rem;
+		background-color: white;
+		-webkit-transform: rotate(45deg);
+		   -moz-transform: rotate(45deg);
+		     -o-transform: rotate(45deg);
+	}
+
+	.checkmark::after {
+		content: "";
+		height: 0.7rem;
+		width: 0.4rem;
+		position: absolute;
+		top: 0.9rem;
+		right: 1.2rem;
+		background-color: white;
+		-webkit-transform: rotate(-45deg);
+		   -moz-transform: rotate(-45deg);
+		     -o-transform: rotate(-45deg);
+	}
+
+	/*--- X-Cross ---*/
+	.x-cross {
+		height: 2rem;
+		width: 2rem;
+		position: absolute;
+	}
+
+	.x-cross::before {
+		content: "";
+		height: 1.4rem;
+		width: 0.4rem;
+		position: absolute;
+		top: 0.3rem;
+		right: 0.8rem;
+		background-color: white;
+		-webkit-transform: rotate(45deg);
+		   -moz-transform: rotate(45deg);
+		     -o-transform: rotate(45deg);
+	}
+
+	.x-cross::after {
+		content: "";
+		height: 1.4rem;
+		width: 0.4rem;
+		position: absolute;
+		top: 0.3rem;
+		right: 0.8rem;
+		background-color: white;
+		-webkit-transform: rotate(-45deg);
+		   -moz-transform: rotate(-45deg);
+		     -o-transform: rotate(-45deg);
+	}
+
+	/*--- Chevron ---*/
+	.chevron {
+		height: 2rem;
+		width: 2rem;
+		position: absolute;
+	}
+
+	.chevron::before {
+		content: "";
+		height: 1rem;
+		width: 0.4rem;
+		position: absolute;
+		top: 0.6rem;
+		right: 0.6rem;
+		background-color: white;
+		-webkit-transform: rotate(45deg);
+		   -moz-transform: rotate(45deg);
+		     -o-transform: rotate(45deg);
+	}
+
+	.chevron::after {
+		content: "";
+		height: 1rem;
+		width: 0.4rem;
+		position: absolute;
+		top: 0.6rem;
+		right: 1rem;
+		background-color: white;
+		-webkit-transform: rotate(-45deg);
+		   -moz-transform: rotate(-45deg);
+		     -o-transform: rotate(-45deg);
+	}
+
+	/*--- Scroll Down Arrow ---*/
+	.scroll-down-arrow {
+		height: 40px;
+		width: 2px;
+		/* Position must not be static*/
+		background-color: black;
+		margin: 1rem;
+		-webkit-transform: rotate(180deg);
+		   -moz-transform: rotate(180deg);
+		     -o-transform: rotate(180deg);
+	}
+
+	.scroll-down-arrow::before {
+		content: "";
+		position: absolute;
+		top: 1px;
+		left: -1px;
+		height: 2px;
+		width: 10px;
+		background-color: black;
+		-webkit-transform: rotate(45deg);
+		   -moz-transform: rotate(45deg);
+		     -o-transform: rotate(45deg);
+	}
+
+	.scroll-down-arrow::after{
+		content: "";
+		position: absolute;
+		top: 1px;
+		left: -7px;
+		height: 2px;
+		width: 10px;
+		background-color: black;
+		-webkit-transform: rotate(-45deg);
+		   -moz-transform: rotate(-45deg);
+		     -o-transform: rotate(-45deg);
+	}
+
+	/*--- Scroll Right Arrow ---*/
+	.scroll-right-arrow {
+		height: 2px;
+		width: 40px;
+		/* Position must not be static*/
+		background-color: black;
+		margin: 1rem;
+		-webkit-transform: rotate(0deg);
+		   -moz-transform: rotate(0deg);
+		     -o-transform: rotate(0deg);
+	}
+
+	.scroll-right-arrow::before {
+		content: "";
+		position: absolute;
+		top: -3px;
+		right: -2px;
+		height: 2px;
+		width: 10px;
+		background-color: black;
+		-webkit-transform: rotate(45deg);
+		   -moz-transform: rotate(45deg);
+		     -o-transform: rotate(45deg);
+	}
+
+	.scroll-right-arrow::after {
+		content: "";
+		position: absolute;
+		top: 3px;
+		right: -2px;
+		height: 2px;
+		width: 10px;
+		background-color: black;
+		-webkit-transform: rotate(-45deg);
+		   -moz-transform: rotate(-45deg);
+		     -o-transform: rotate(-45deg);
+	}
+
+	/*--- Add Button ---*/
+	.add-button {
+		height: 35px;
+		width: 35px;
+		position: relative;
+		border: 2px solid #000000;/*#6495ED*/
+		border-radius: 100%;
+		/*animation*/
+		transition-timing-function: all ease 0.3s;
+		-webkit-transition: all ease 0.3s; /* Safari */
+		transition: all ease 0.3s;
+	}
+
+	.add-button .line-1 {
+		width: 25px;
+		height: 2px;
+		background-color: #000000;/*#6495ED*/
+		display: inline-block;
+		position: absolute;
+		top: calc((100% - 2px) / 2);
+		left: calc((100% - 25px) / 2);
+	}
+
+	.add-button .line-2 {
+		width: 2px;
+		height: 25px;
+		background-color: #000000;/*#6495ED*/
+		display: inline-block;
+		position: absolute;
+		top: calc((100% - 25px) / 2);
+		left: calc((100% - 2px) / 2);
+	}
+
+		/*--- Pseudo ---*/
+		.add-button:hover {
+			background-color: #000000;/*#6495ED*/
+		}
+
+		.add-button:hover .line-1 {
+			background-color: #ffffff;
+		}
+
+		.add-button:hover .line-2 {
+			background-color: #ffffff;
+		}
+
+	/*--- Round Text Button ---*/
+	.round-button {
+		font-family: 'Rubik-Regular';
+		height: 4.5rem;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+		font-size: 2rem;
+		font-weight: 300;
+		background-color: black;
+		border: 2px solid black;
+		color: white;
+		cursor: pointer;
+		outline: none;
+		/*animation*/
+		transition-timing-function: all ease 0.3s;
+		-webkit-transition: all ease 0.3s; /* Safari */
+		transition: all ease 0.3s;
+	}
+		/*-- Pseudo --*/
+		.round-button:hover {
+			background-color: #092352;
+			border: 2px solid #092352;
+		}
+
+		/*--- Styles ---*/
+		.round-button.white-outline {
+			background-color: rgba(255,255,255,0);
+			border: 2px solid white;
+			color: white;
+		}
+
+			/*-- Pseudo --*/
+			.round-button.white-outline:hover {
+				background-color: white;
+				color: black;
+			}
+
+	/*--- More Options ---*/
+	.more-options {
+		cursor: pointer;
+		width: 8.7rem;
+		height: 3rem;
+	}
+
+	.more-options .inner-container {
+		height: 1.9rem;
+		width: 6.6rem;
+		padding: 0.1rem 0rem 0rem 2.1rem;
+		position: relative;
+		/*animation*/
+		transition-timing-function: all ease 0.3s;
+		-webkit-transition: all ease 0.3s; /* Safari */
+		transition: all ease 0.3s;
+	}
+
+		/*# JS applied states #*/
+		.open-option .more-options .inner-container {
+			width: 6.6rem;
+			height: 3rem;
+			padding: 0rem;
+			/*animation*/
+			transition-timing-function: all ease 0.3s;
+			-webkit-transition: all ease 0.3s; /* Safari */
+			transition: all ease 0.3s;
+		}
+
+	.more-options .option-container {
+		display: inline-block;
+	}
+
+		/*# JS applied states #*/
+		.open-option .more-options .option-container {
+			position: relative;
+			height: 3rem;
+			width: 2rem;
+		}
+
+	.more-options .option-container p {
+		font-family: 'Rubik-Medium';
+		font-weight: 400;
+		position: absolute;
+		top: 0rem;
+		left: 0.2rem;
+		opacity: 0;
+		margin: 0rem;
+	}
+
+	.more-options .circle-option {
+		background-color: #85888C;
+		border-radius: 100%;
+		height: 0.6rem;
+		width: 0.6rem;
+		margin-top: 1rem;
+		display: inline-block;
+		/*animation*/
+		transition-timing-function: all ease 0.3s;
+		-webkit-transition: all ease 0.3s; /* Safari */
+		transition: all ease 0.3s;
+	}
+
+		/*# JS applied states #*/
+		.open-option .more-options .circle-option {
+			height: 2rem;
+			width: 2rem;
+			background-color: #cecfd1;
+			position: relative;
+		}
+
+		/*-- Pseudo --*/
+		.more-options:hover .circle-option {
+			margin-bottom: 0.1rem;
+			background-color: black;
+		}
+
+		/*-- Delay --*/
+		.more-options .option-2 .circle-option {
+			/*animation*/
+			-webkit-transition-delay: 0.1s; /* Safari */
+			transition-delay: 0.1s;
+		}
+
+		.more-options .option-3 .circle-option {
+			/*animation*/
+			-webkit-transition-delay: 0.2s; /* Safari */
+			transition-delay: 0.2s;
+		}
+
+		/*-- Inner Icon --*/
+		.more-options .circle-option .inner-icon {
+			opacity: 0;
+		}
+
+			/*# JS applied states #*/
+
+			.open-option .more-options .circle-option .inner-icon {
+				opacity: 1;
+				/*animation*/
+				transition-timing-function: all 0.6s ease 0.3s;
+				-webkit-transition: all 0.6s ease 0.3s; /* Safari */
+				transition: all 0.6s ease 0.3s;
+			}
+
+		/*-- Colors --*/
+		.more-options .option-1 {
+			color: #bbef94;
+		}
+
+		.more-options .option-2 {
+			color: #ff9f9f;
+		}
+
+		.more-options .option-3 {
+			color: #85888C;
+		} 
+
+			/*# JS applied states #*/
+			.open-option .more-options .option-1:hover p,
+			.open-option .more-options .option-2:hover p,
+			.open-option .more-options .option-3:hover p {
+				opacity: 1;
+				/*animation*/
+				-webkit-transition-delay: 0s; /* Safari */
+				transition-delay: 0s;
+			}
+
+			.open-option .more-options:hover .circle-option {
+				margin-bottom: 0rem;
+				background-color: #cecfd1; /* Dark Grey: #85888C */
+			}
+
+			.open-option .more-options .option-1:hover .circle-option {
+				background-color: #bbef94; /* Dark Green: #134515 */
+				/*animation*/
+				-webkit-transition-delay: 0s; /* Safari */
+				transition-delay: 0s;
+			}
+
+			.open-option .more-options .option-2:hover .circle-option {
+				background-color: #ff9f9f; /* Dark Red: #6d211e */
+				/*animation*/
+				-webkit-transition-delay: 0s; /* Safari */
+				transition-delay: 0s;
+			}
+
+			.open-option .more-options .option-3:hover .circle-option {
+				background-color: #85888C;
+				/*animation*/
+				-webkit-transition-delay: 0s; /* Safari */
+				transition-delay: 0s;
+			}
+
+
+
+/*--- Form Elements ---*/
+.input-line {
+	height: 2.5rem;
+	border-bottom: 2px solid #85888C;
+}
+
+	/* Used for inline input*/
+	.input-line.add-space {
+		margin-left: 1rem;
+	}
+
+	.input-line input {
+		width: 100%;
+		height: 3rem;
+		border: 0px;
+		font-size: 2.88rem;
+		color: #85888C;
+		outline: none;
+		text-align: center;
+		background-color: rgba(255,255,255,0); 
+	}
+
+		/* Alignment Options */
+		.input-line input.left {
+			text-align: left;
+		}
+
+textarea.task-description {
+	outline: none;
+	resize: none;
+	height: 7.5rem;
+	width: 39.4rem;
+	font-size: 1.2rem;
+	font-family:  'OpenSans-Regular';
+}
+
+/*--- Directives ---*/
+
+	/*--- Drag Drop List ---*/
+	.drag-drop-container .inner-container {
+		position: relative;
+		width: 40rem;
+		padding-top: 1rem;
+	}
+
+	.drag-drop-container .inner-container .more-options {
+		position: absolute;
+		top: 0rem;
+		right: -2rem;
+	}
+
+	.contents {
+		height: 2.8rem;
+		width: 40rem;
+		overflow: hidden;
+		/*animation*/
+		transition-timing-function: all ease 0.3s;
+		-webkit-transition: all ease 0.3s; /* Safari */
+		transition: all ease 0.3s;
+	}
+
+		/*# JS applied states #*/
+		.open-option .contents {
+			height: 10.8rem;
+		}
+		
+/*-- Animations --*/
+	/* -- Bounce --*/
+	.bounce {
+		-webkit-animation: bounce 1s ease-in-out infinite alternate; /* Chrome, Safari, Opera */
+		animation: bounce 1s ease-in-out infinite alternate;
+	}
+
+	/* Chrome, Safari, Opera */ 
+	@-webkit-keyframes bounce {
+	    from {
+	    	margin-bottom: 0rem;
+	    }
+	    to {
+	    	margin-bottom: -0.5rem;
+	    }
+	} 
+
+	/* Standard syntax */ 
+	@keyframes bounce {
+	    from {
+	    	margin-bottom: 0rem;
+	    }
+	    to {
+	    	margin-bottom: -0.5rem;
+	    }
+	}
+
+
+
+

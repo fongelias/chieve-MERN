@@ -1,0 +1,434 @@
+/* READ ME */
+/*
+This file is used for page specific CSS- namely javascript state classes,
+page-specific components, and other CSS that exists within the specified
+view
+*/
+
+/* NOTE: The Landing page animations are potentially subject to significant
+	changes. Due to this, a larger number of classes are used to make the
+	state changes more descriptive, and potentially more interchangable. */
+
+/*--- Text ---*/
+.text.title-header {
+	font-size: 12.8rem;
+	font-weight: 400;
+}
+
+.text.title-pronounciation {
+	font-size: 3.2rem;
+	font-weight: 100;
+	letter-spacing: 0.2rem;
+}
+
+.text.title-paragraph {
+	font-size: 2.88rem;
+}
+
+.text.landing-sign-in {
+	font-size: 10.8rem;
+	font-weight: 100;
+	margin-bottom: 6rem;
+}
+
+/*--- Form Elements ---*/
+.input-line {
+	height: 2.5rem;
+	border-bottom: 2px solid #85888C;
+}
+
+	/* Used for inline input*/
+	.input-line.add-space {
+		margin-left: 1rem;
+	}
+
+	.input-line input {
+		width: 100%;
+		height: 3rem;
+		border: 0px;
+		font-size: 2.88rem;
+		color: #85888C;
+		outline: none;
+		text-align: center;
+		background-color: rgba(255,255,255,0); 
+	}
+
+.user-info-input {
+	height: 3rem;
+	position: relative;
+	margin-bottom: 2rem;
+}
+
+	.user-info-input input {
+		outline: none;
+		width: 100%;
+		color: #85888C;
+		height: 3rem;
+		font-size: 2.88rem;
+		border: 0px solid #ffffff;
+		border-bottom: 1px solid #b5b7ba;
+		background-color: rgba(255,255,255,0); 
+	}
+
+	.user-info-input .focus-effect-object {
+		border-bottom: 2px solid #0c2d69;
+		width: 0rem;
+		position: absolute;
+		top: 3.1rem;
+		/*animation*/
+		transition-timing-function: all ease 1s;
+		-webkit-transition: all ease 1s; /* Safari */
+		transition: all ease 1s;
+	}
+
+	/*# JS applied states #*/
+	.user-info-input.input-active .focus-effect-object {
+		border-bottom: 2px solid #0c2d69;
+		width: calc(100% + 2px);
+	}
+
+	.user-info-input.form-field-error input {
+		background-color: rgba(199,31,0,0.3);
+	}
+
+	/*--- Styles ---*/
+	/*-- White --*/
+	.user-info-input.white input {
+		color: #ffffff;
+	}
+
+	.user-info-input.white .focus-effect-object {
+		border-bottom: 2px solid #ffffff;
+	}
+
+		/*# JS applied states #*/
+		.user-info-input.white.input-active .focus-effect-object {
+			border-bottom: 2px solid #ffffff;
+		}
+
+/*-- Parallax --*/
+.parallax-container {
+	perspective: 1px;
+	height: 100vh;
+	overflow-x: hidden;
+	overflow-y: auto;
+	perspective-origin-x: 100%;
+}
+
+.parallax-layer {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	transform-origin-x: 100%;
+}
+
+.parallax-min {
+	transform: translateZ(-4px) scale(5); /*Scale = 1 + (translateZ * -1) / perspective*/
+}
+
+.parallax-mid {
+	transform: translateZ(-1px) scale(2); /*Scale = 1 + (translateZ * -1) / perspective*/
+}
+
+.parallax-max {
+	transform: translateZ(0px);
+}
+
+/*-- Containers --*/
+#title-header-container .inner-container {
+	position: absolute;
+	top: 10rem;
+	padding-left: calc((100% - 40rem * 1.5) / 2);
+} /*TODO: fix for screens smaller than 60px*/
+
+	/*# JS applied states #*/
+	#title-header-container.scroll-fix .inner-container {
+		top: 0rem;
+	}
+
+#title-description-container .inner-container {
+	position: absolute;
+	top: 40rem;
+	padding-left: calc((100% - 40rem * 1.5) / 2);
+} /*TODO: fix for screens smaller than 60px*/
+
+	/*# JS applied states #*/
+	#title-description-container.scroll-fix .inner-container {
+		top: 13.5rem;
+	}
+
+
+#title-fading-text {
+	max-width: 67rem;
+}
+
+	/*-- Page 1 --*/
+	#title-secondary-container .inner-container {
+		position: absolute;
+		top: 29rem;
+		padding-left: calc((100% - 40rem * 1.5) / 2);
+	} /*TODO: fix for screens smaller than 60px*/
+
+		/*# JS applied states #*/
+		#title-secondary-container.scroll-invisible {
+			display: none;
+		}
+
+	/*-- Page 2 --*/
+	#title-input-text {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	#title-input-text.scroll-fade-in {
+		visibility: visible;
+		opacity: 1;
+		/*animation*/
+		transition-timing-function: all ease 1s;
+		-webkit-transition: all ease 1s; /* Safari */
+		transition: all ease 1s;
+	}
+
+		/*# JS applied states #*/
+		#title-input-text.exit-left {
+			margin-left: calc(-100% + -39rem);
+		}
+
+	/*-- Page 3 --*/
+	#landing-task-list {
+		position: absolute;
+		padding: 0rem calc((100% - 40rem) / 2) 0rem calc((100% - 40rem) / 2);
+		top: 35%;
+		width: 40rem;
+		left: 200%;
+		/*animation*/
+		transition-timing-function: all ease 1s;
+		-webkit-transition: all ease 1s; /* Safari */
+		transition: all ease 1s;
+	}
+
+		/*# JS applied states #*/
+		#landing-task-list.enter-left {
+			left: 0%;
+		}
+
+		#landing-task-list.exit-left {
+			left: -100%;
+		}
+
+	#landing-task-list .add-button {
+		margin-top: 4rem;
+		margin-bottom: 6rem;
+		margin-left: calc((40rem - 35px) / 2);
+		cursor: pointer;
+	}
+
+	/*-- Page 4 --*/
+	#landing-sign-up {
+		padding-left: calc((100% - 30rem) / 2);
+		padding-right: calc((100% - 30rem) / 2);
+		width: 30rem;
+		position: absolute;
+		top: 35%;
+		left: 200%;
+		/*animation*/
+		transition-timing-function: all ease 1s;
+		-webkit-transition: all ease 1s; /* Safari */
+		transition: all ease 1s;
+	}
+
+		/*# JS applied states #*/
+		#landing-sign-up.enter-left {
+			left: 0%;
+		}
+
+	#landing-sign-up .round-button {
+		margin-top: 1rem;
+		margin-bottom: 4rem;
+	}
+	/*-- Sign In --*/
+	#landing-sign-in-link {
+		position: fixed;
+		top: 1rem;
+		right: 4rem;
+		font-size: 1.88rem;
+		font-family: "Rubik-Medium";
+		font-weight: 500;
+		text-decoration: none;
+		color: black;
+	}
+
+	#landing-sign-in-overlay {
+		top: calc(-1 * ((2 * 150vw) / 2 + 1rem));
+		right: calc(-1 * ((2 * 150vw) / 2 + 4rem));
+		/*animation*/
+		transition-timing-function: all ease 1s;
+		-webkit-transition: all ease 1s; /* Safari */
+		transition: all ease 1s;
+	}
+	/*TODO: Change units from vw to vh when aspect ration has a larger height*/
+
+		/*# JS applied states #*/
+		.sign-in-overlay-open #landing-sign-in-overlay {
+			height: calc(2 * 150vw);
+			width: calc(2 * 150vw);
+			visibility: visible;
+			opacity: 1;
+		}
+
+	#landing-sign-in-container {
+		position: fixed;
+		left: 0rem;
+		top: 0rem;
+		height: 100%;
+		padding-left: calc((100% - 65rem) / 2);
+		padding-right: calc((100% - 65rem) / 2);
+		visibility: hidden;
+		opacity: 0;
+	}
+
+		/*# JS applied states #*/
+		.sign-in-overlay-open #landing-sign-in-container {
+			visibility: visible;
+			opacity: 1;
+			/*animation*/
+			transition-timing-function: all ease 1.3s;
+			-webkit-transition: all ease 1.3s; /* Safari */
+			transition: all ease 1.3s;
+		}
+
+	#landing-sign-in-close {
+		position: fixed;
+		top: 1rem;
+		right: 4rem;
+		font-size: 1.88rem;
+		font-family: "Rubik-Medium";
+		font-weight: 500;
+		text-decoration: none;
+		color: white;
+		opacity: 0;
+	}
+
+		/*# JS applied states #*/
+		.sign-in-overlay-open #landing-sign-in-close {
+			opacity: 1;
+		}
+
+	#landing-sign-in-container .inner-container {
+		width: 35rem;
+	}
+
+		/*--- Context Changes ---*/
+		#landing-sign-in-container .inner-container .user-info-input {
+			margin-bottom: 4rem;
+		}
+
+
+/*--- Tasks ---*/
+.task-container {
+	width: 40rem;
+	height: 5rem;
+}
+
+/*-- Icons --*/
+#landing-scroll-down-arrow {
+	position: fixed;
+	bottom: 65%;
+	right: 4rem;
+	cursor: pointer;
+}
+	
+	/*# JS applied states #*/
+	#landing-scroll-down-arrow.scroll-invisible {
+		opacity: 0;
+		/*animation*/
+		transition-timing-function: all ease 1s;
+		-webkit-transition: all ease 1s; /* Safari */
+		transition: all ease 1s;
+	}
+
+#landing-goal-scroll-right-arrow {
+	display: flex;
+	visibility: hidden;
+	opacity: 0;
+	position: fixed;
+	bottom: 40%;
+	right: 8rem;
+	cursor: pointer;
+}
+
+#landing-goal-scroll-right-arrow .inner-container {
+	padding-top: 1.4rem;
+}
+
+	/*# JS applied states #*/
+	#landing-goal-scroll-right-arrow.keydown-visible {
+		visibility: visible;
+		opacity: 1;
+		/*animation*/
+		transition-timing-function: all ease 1s;
+		-webkit-transition: all ease 1s; /* Safari */
+		transition: all ease 1s;
+	}
+
+	#landing-goal-scroll-right-arrow.keydown-visible:hover {
+		opacity: 0.3;
+	}
+
+	#landing-goal-scroll-right-arrow.exit-right {
+		right: -20rem;
+		/*animation*/
+		transition-timing-function: all ease 1s;
+		-webkit-transition: all ease 1s; /* Safari */
+		transition: all ease 1s;
+	}
+
+#landing-task-scroll-right-arrow {
+	display: flex;
+	visibility: hidden;
+	opacity: 0;
+	position: fixed;
+	bottom: 12%;
+	right: 1rem;
+	cursor: pointer;
+}
+
+#landing-task-scroll-right-arrow .inner-container {
+	padding-top: 1.4rem;
+}
+
+	/*# JS applied states #*/
+	#landing-task-scroll-right-arrow.keydown-visible {
+		visibility: visible;
+		opacity: 1;
+		/*animation*/
+		transition-timing-function: all ease 1s;
+		-webkit-transition: all ease 1s; /* Safari */
+		transition: all ease 1s;
+	}
+
+	#landing-task-scroll-right-arrow.keydown-visible:hover {
+		opacity: 0.3;
+	}
+
+	#landing-task-scroll-right-arrow.exit-right {
+		right: -20rem;
+		/*animation*/
+		transition-timing-function: all ease 1s;
+		-webkit-transition: all ease 1s; /* Safari */
+		transition: all ease 1s;
+	}
+
+
+
+
+
+
+
+
+
