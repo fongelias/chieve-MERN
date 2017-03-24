@@ -12,7 +12,7 @@
 - [ ] Dashboard React
 	- [ ] Gulp for React
 - [ ] Dashboard API
-[x] Favicon
+- [x] Favicon
 - [ ] Social sharing
 - [ ] Search Goals
 
