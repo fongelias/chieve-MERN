@@ -29,7 +29,15 @@ view
 	font-size: 10.8rem;
 	font-weight: 100;
 	margin-bottom: 6rem;
+	/*animation*/
+	transition-timing-function: all ease 1s;
+	-webkit-transition: all ease 1s; /* Safari */
+	transition: all ease 1s;
 }
+
+	.expanded-sign-in-form .text.landing-sign-in {
+		margin-bottom: 1rem;
+	}
 
 /*--- Form Elements ---*/
 .input-line {
@@ -326,6 +334,15 @@ view
 		/*--- Context Changes ---*/
 		#landing-sign-in-container .inner-container .user-info-input {
 			margin-bottom: 4rem;
+		}
+
+		#landing-sign-in-container .inner-container .user-info-input.last {
+			margin-bottom: 2rem;
+		}
+
+		#landing-sign-in-container .inner-container .error-message {
+			margin-bottom: 1.5rem;
+			height: 1.8rem;
 		}
 
 

@@ -63,7 +63,7 @@ exports.register = function(req, res, next) {
 			if (err) {
 				var message = getErrorMessage(err);
 				req.flash('error', message);
-				return res.redirect('/register');
+				return res.json({success: false, message: err, nextUrl: '/register'});
 			}
 
 			//"req.login" method from passport module
@@ -72,11 +72,11 @@ exports.register = function(req, res, next) {
 					return next(err);
 				}
 
-				return res.redirect('/');
+				return res.json({success: true, message: err, nextUrl: '/dashboard'});
 			});
 		});
 	} else {
-		return res.redirect('/');
+		return res.json({success: true, nextUrl: '/dashboard'});
 	}
 };
 

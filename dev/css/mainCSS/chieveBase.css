@@ -54,6 +54,10 @@ helper classes, and states.
 		color: #ffffff;
 	}
 
+	.text.red {
+		color: #fb234c;
+	}
+
 	/*--- Margins ---*/
 	.text.no-margin-bottom{
 		margin-bottom: 0rem;
@@ -75,6 +79,35 @@ body {
 	display: flex;
 	flex-direction: row;
 }
+	/* -Vertical Flex Box-*/
+	.flex.vertical {
+		flex-direction: column;
+	}
+
+	/* -Flex Box Options-*/
+	.flex.center {
+		align-items: center;
+	}
+
+	.flex.align-start {
+		align-items: flex-start;
+	}
+
+	.flex.align-end {
+		align-items: flex-end;
+	}
+
+	.flex.split {
+		justify-content: space-between;
+	}
+
+	.flex.justify {
+		justify-content: center;
+	}
+
+	.flex.wrap {
+		flex-wrap: wrap;
+	}
 
 /*--- Overlays ---*/
 .black-overlay-expanding {
@@ -349,6 +382,11 @@ body {
 				color: black;
 			}
 
+			.round-button.white-outline:active {
+				background-color: rgba(255,255,255,0.48);
+				color: black;
+			}
+
 	/*--- More Options ---*/
 	.more-options {
 		cursor: pointer;
@@ -572,6 +610,25 @@ textarea.task-description {
 		}
 		
 /*-- Animations --*/
+	/*-- Animation Ease Transition--*/
+	.ease {
+		/*animation*/
+		transition-timing-function: all ease 1s;
+		-webkit-transition: all ease 1s; /* Safari */
+		transition: all ease 1s;
+	}
+
+	/*-- Appear --*/
+	.appear {
+		display: none;
+		opacity: 0;
+	}
+
+		.transition {
+			display: initial;
+			opacity: 0;
+		}
+
 	/* -- Bounce --*/
 	.bounce {
 		-webkit-animation: bounce 1s ease-in-out infinite alternate; /* Chrome, Safari, Opera */

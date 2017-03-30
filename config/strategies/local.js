@@ -6,21 +6,22 @@ var User = require('mongoose').model('User');
 //Exposed module
 module.exports = function() {
 	passport.use(new LocalStrategy(function(username, password, done) {
-		User.findOne({username: username},
+		console.log("local.js(" + username + ")");
+		User.findOne({email: username},
 			function(err, user) {
 				if (err) {
 					return done(err);
 				}
 
 				if (!user) {
-					return done(null, false, {message: 'Unknown user'});
+					return done(null, false, {success: false, message: 'No account exists for this email'});
 				}
 
 				if (!user.authenticate(password)) {
-					return done(null, false, {message: 'Invalid password'});
+					return done(null, false, {success: false, message: 'Invalid password'});
 				}
 
-				return done(null, user);
+				return done(null, user, {success: true, message: 'Sign in success!'});
 			}
 		);
 	}));

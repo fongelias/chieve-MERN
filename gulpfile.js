@@ -5,6 +5,7 @@ var gulp = require('gulp');
 //Require AddOns
 var gulpIf = require('gulp-if');
 var runSequence = require('run-sequence');
+var pump = require('pump');
 //CSS/JS concat and minification
 var useref = require('gulp-useref');
 var uglify = require('gulp-uglify');
@@ -37,20 +38,32 @@ gulp.task('default', ['build']);
 //ejs compiler
 gulp.task('build', function() {
 	console.log("Running gulpfile.build()");
-	runSequence('compileView', 'moveEJS', 'delEJS', 'moveStaticAssets');
+	runSequence('compileView', 'compressJS', 'moveEJS', 'delEJS', 'moveStaticAssets');
 });
 
 
-//minifies/concatinates css/js
+//minifies/concatinates css, concatinates js
 gulp.task('compileView', function() {
 	console.log("Running gulpfile.compileView()");
 	return gulp.src(path.compilerSrc + '**/*.ejs')
 		.pipe(useref())
 		//Minifies if Javascript
-		.pipe(gulpIf('*.js', uglify()))
+		//.pipe(gulpIf('*.js', uglify()))
 		//Minifies if CSS
 		.pipe(gulpIf('*.css', cssnano()))
 		.pipe(gulp.dest(path.compilerDest));
+});
+
+
+//minifies js
+gulp.task('compressJS', function(callback) {
+	pump([
+		gulp.src(path.compilerDest + '/js/pages/*.js'),
+		uglify(),
+		gulp.dest(path.compilerDest + '/js/pages/')
+		],
+		callback
+	);
 });
 
 

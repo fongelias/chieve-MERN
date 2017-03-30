@@ -26,7 +26,7 @@ var UserSchema = new Schema({
 	provider: String, //Strategy used to register the user
 	providerId: String, //User udentifier for the auth strategy
 	providerData: {}, //Store user object retrieved from OAuth providers
-	tasks: {} 
+	currentGoals: {} 
 });
 
 
@@ -34,7 +34,7 @@ var UserSchema = new Schema({
 UserSchema.pre('save',
 	function(next) {
 		if (this.password) {
-			var md5 = crypto.createHash(md5);
+			var md5 = crypto.createHash('md5');
 			this.password = md5.update(this.password).digest('hex');
 		}
 

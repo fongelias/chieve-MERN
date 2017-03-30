@@ -89,16 +89,21 @@
 			<h2 class="text landing-sign-in white">Let's get down to business</h2>
 			<div class="inner-container">
 				<div class="user-info-input white">
-					<input type="email" tabindex="-5" placeholder="email" ng-model="user.email">
+					<input type="email" tabindex="-5" placeholder="email" id="sign-in-email">
 					<div class="focus-effect-object"></div>
 				</div>
 				<div class="user-info-input white">
-					<input type="password" tabindex="-6" placeholder="password" ng-model="user.pass">
+					<input type="password" tabindex="-6" placeholder="password" id="sign-in-password">
 					<div class="focus-effect-object"></div>
 				</div>
-				<div class="flex">
-					<button class="round-button white-outline" tabindex="-7" ng-click="signIn(user)">SIGN IN</button>
-					<div class="error-message"></div>
+				<div class="create-acct appear last user-info-input white">
+					<input type="password" tabindex="-6" placeholder="confirm password" id="sign-in-confirm-password">
+					<div class="focus-effect-object"></div>
+				</div>
+				<div id="landing-sign-in-error" class="error-message small text red"><%= messages[0] %></div>
+				<div class="flex split">
+					<button id="landing-sign-in-button" class="round-button white-outline" tabindex="-7" ng-click="signIn(user)">SIGN IN</button>
+					<button id="landing-sign-up-button" class="create-acct appear round-button white-outline" tabindex="-7" ng-click="signIn(user)">SIGN UP</button>
 				</div>
 			</div>
 		</section>

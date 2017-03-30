@@ -24,12 +24,27 @@ module.exports = function(app) {
 	//Get to retrieve login page
 	//Post to authenticate user locally and redirect them
 	app.route('/login')
-		.get(users.renderLogin)
-		.post(passport.authenticate('local', {
-			successRedirect: '/',
-			failureRedirect: '/login',
-			failureFlash: true
-		}));
+		.get(users.renderLogin);
+
+	app.post('/login', function(req, res, next) {
+		passport.authenticate('local', function(err, user, info) {
+			if (err) { 
+				return next(err); 
+			}
+			
+			if (!user) { 
+				console.log(info);
+				return res.json(info); 
+			}
+
+			req.logIn(user, function(err) {
+				if (err) { 
+					return next(err); 
+				}
+				return res.json(info);
+			});
+		})(req, res, next);
+	});
 	//Get to login user using facebook OAuth
 	app.get('/oauth/facebook', passport.authenticate('facebook', {
 		failureRedirect: '/login',
