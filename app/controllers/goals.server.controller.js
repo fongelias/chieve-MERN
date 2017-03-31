@@ -1,5 +1,6 @@
 //Dependency Injection========================================================
 var Goal = require('mongoose').model('Goal');
+var User = require('mongoose').model('User');
 var passport = require('passport');
 
 //Private Functions===========================================================
@@ -25,6 +26,7 @@ var getErrorMessage = function(err) {
 $ curl -X POST -H "Content-Type: application/json" -d '{"name": "Kevin", "email": "kevin@mitnick.com", "username": "Condor", "password": "AintNoBodyGotTimeForGoodPa$words!!!"}' localhost:1337/goals
 */
 exports.create = function(req, res) {
+	console.log('goals.server.controller.create();')
 	var goal = new Goal(req.body);
 	goal.creator = req.user;
 	goal.save(function(err) {
@@ -33,6 +35,15 @@ exports.create = function(req, res) {
 				message: getErrorMessage(err)
 			});
 		} else {
+			//Update User to reflect new goal
+			User.findByIdAndUpdate(
+				req.user._id,
+				{$push: {"currentGoals" : goal._id}},
+				{safe: true, upsert: true},
+			    function(err, model) {
+			        console.log(err);
+			    }
+			);
 			res.json(goal);
 		}
 	});

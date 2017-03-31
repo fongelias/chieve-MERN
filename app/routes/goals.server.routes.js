@@ -15,7 +15,7 @@ module.exports = function(app) {
 	//Put to check if user is logged in and owns a goal, then updates an existing goal
 	//Delete to check if user is logged in and owns a goal, then deletes an existing goal
 	app.route('/api/goals/:goalId')
-		.get(goal.read)
+		.get(goals.read)
 		.put(users.requiresLogin, goals.hasAuthorization, goals.update)
 		.delete(users.requiresLogin, goals.hasAuthorization, goals.delete);
 
