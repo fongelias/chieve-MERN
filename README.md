@@ -9,6 +9,12 @@
 	- [x] Sign Up
 	- [ ] FB
 	- [ ] Onboard Sign Up
+		- [x] Add ajax form in dashboard to Test API routes
+		- [ ] Test API routes for adding a task
+		- [ ] Test API routes for reading the tasks of the user
+		- [x] Add Goal model
+		- [ ] Add Goal API routes
+		- [ ] Add Goal controller
 - [ ] Dashboard React
 	- [ ] Gulp for React
 - [ ] Dashboard API

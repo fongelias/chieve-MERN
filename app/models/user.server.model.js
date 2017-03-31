@@ -26,7 +26,10 @@ var UserSchema = new Schema({
 	provider: String, //Strategy used to register the user
 	providerId: String, //User udentifier for the auth strategy
 	providerData: {}, //Store user object retrieved from OAuth providers
-	currentGoals: {} 
+	currentGoals: [{
+		type: Schema.ObjectId,
+		ref: 'Goal'
+	}] 
 });
 
 

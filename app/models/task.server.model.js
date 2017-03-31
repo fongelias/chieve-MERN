@@ -23,6 +23,11 @@ var TaskSchema = new Schema({
 		type: String,
 		default: '',
 		trim: true
+	},
+	goal: {
+		type: Schema.ObjectId,
+		ref: 'Task'
+		//required: "Task must be associated to a goal"
 	}
 });
 

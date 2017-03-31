@@ -7,6 +7,7 @@ module.exports = function() {
 	//Models
 	require('../app/models/user.server.model');
 	require('../app/models/task.server.model');
+	require('../app/models/goal.server.model');
 
 	return db;
 };
