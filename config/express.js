@@ -39,6 +39,7 @@ module.exports = function() {
 	require('../app/routes/index.server.routes.js')(app);
 	require('../app/routes/users.server.routes.js')(app);
 	require('../app/routes/tasks.server.routes.js')(app);
+	require('../app/routes/goals.server.routes.js')(app);
 	//Set location of static assets
 	app.use(express.static('./public'));
 
