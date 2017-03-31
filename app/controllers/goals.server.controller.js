@@ -18,8 +18,6 @@ var getErrorMessage = function(err) {
 
 
 //Exports======================================================================
-
-
 //CRUD-------------------------------------------------------------------------
 //Takes a json object and saves it as a new goal
 /* Example:

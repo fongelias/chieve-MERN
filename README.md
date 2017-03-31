@@ -13,10 +13,15 @@
 		- [x] Test API routes for adding a task
 		- [ ] Test API routes for reading the tasks of the user
 		- [x] Add Goal model
-		- [ ] Add Goal API routes
+		- [x] Add Goal API routes
 			- [x] Test adding the goal to its owner
 			- [x] Test adding a goal to its task
-			- [ ] Test adding a task to its goal
+			- [x] Test adding a task to its goal
+			- [ ] Return a user's goals
+			- [ ] Update a user's goals
+			- [ ] Delete a goal and remove its associated tasks, and 
+				  remove it from the user
+			- [ ] Delete a task and remove its associated goal
 		- [x] Add Goal controller
 - [ ] Dashboard React
 	- [ ] Gulp for React

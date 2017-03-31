@@ -1,5 +1,7 @@
 //Dependency Injection========================================================
 var User = require('mongoose').model('User');
+var Goal = require('mongoose').model('Goal');
+var Task = require('mongoose').model('Task');
 var passport = require('passport');
 
 //Private Functions===========================================================
@@ -26,6 +28,33 @@ var getErrorMessage = function(err) {
 };
 
 //Exports======================================================================
+//Return a user's goals
+exports.readGoals = function(req, res, next) {
+	Goal.find({
+		'_id': {$in: req.user.currentGoals}
+	}, function(err, goals) {
+		if (err) {
+			return next(err);
+		} else {
+			console.log(goals);
+			res.json(goals);
+		}
+	});
+}
+
+
+//Update a user's goals
+exports.updateGoals = function(req, res, next) {
+	/*User.findByIdAndUpdate(req.user.id, req.body, function(err,user) {
+		if (err) {
+			return next(err);
+		} else {
+			res.json(user);
+		}
+	})*/
+}
+
+
 //Serve login page
 exports.renderLogin = function(req, res, next) {
 	if (!req.user) {
