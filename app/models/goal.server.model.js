@@ -24,7 +24,7 @@ var GoalSchema = new Schema({
 		default: '',
 		trim: true
 	},
-	Tasks: [{
+	tasks: [{
 		type: Schema.ObjectId,
 		ref: 'Task'
 	}]

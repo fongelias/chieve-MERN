@@ -130,6 +130,7 @@ exports.logout = function(req, res) {
 $ curl -X POST -H "Content-Type: application/json" -d '{"name": "Kevin", "email": "kevin@mitnick.com", "username": "Condor", "password": "AintNoBodyGotTimeForGoodPa$words!!!"}' localhost:1337/users
 */
 exports.create = function(req, res, next) {
+	console.log('users.server.controller.create();')
 	var user = new User(req.body);
 	user.save(function(err) {
 		if (err) {

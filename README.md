@@ -15,7 +15,8 @@
 		- [x] Add Goal model
 		- [ ] Add Goal API routes
 			- [x] Test adding the goal to its owner
-			- [x] Test adding a task to its goal
+			- [x] Test adding a goal to its task
+			- [ ] Test adding a task to its goal
 		- [x] Add Goal controller
 - [ ] Dashboard React
 	- [ ] Gulp for React

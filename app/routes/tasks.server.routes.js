@@ -1,6 +1,7 @@
 //Dependency Injection
 var users = require('../../app/controllers/users.server.controller');
 var tasks = require('../../app/controllers/tasks.server.controller');
+var goals = require('../../app/controllers/goals.server.controller');
 
 
 //Exposed module
