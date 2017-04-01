@@ -18,6 +18,7 @@
 			- [x] Test adding a goal to its task
 			- [x] Test adding a task to its goal
 			- [x] Return a user's goals
+			- [ ] Return a goal's tasks
 			- [x] Update a user's goals
 			- [x] "Complete a goal" by moving it from the user's list 
 				  to another list

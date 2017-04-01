@@ -18,7 +18,9 @@ module.exports = function(app) {
 		.get(goals.read)
 		.put(users.requiresLogin, goals.hasAuthorization, goals.update)
 		.delete(users.requiresLogin, goals.hasAuthorization, goals.delete);
-
+	//Get using request param 'goalId' to retrieve tasks for one goal
+	app.route('/api/goals/:goalId/tasks')
+		.get(goals.readTasks);
 	//Request Params
 	app.param('goalId', goals.goalByID);
 }

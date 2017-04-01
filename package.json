@@ -1,7 +1,7 @@
 {
   "name": "meanpractice",
   "version": "1.0.0",
-  "description": "project used to build a local mean stack app",
+  "description": "Goal management application",
   "main": "index.js",
   "scripts": {
     "start": "node server",
@@ -12,9 +12,12 @@
     "url": "git+https://github.com/fongelias/meanpractice.git"
   },
   "keywords": [
-    "boilerplate",
-    "test",
-    "practice"
+    "Goal manager",
+    "MERN",
+    "MongoDB",
+    "Express",
+    "React",
+    "Node"
   ],
   "author": "Elias",
   "license": "MIT",
