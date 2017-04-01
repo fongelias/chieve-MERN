@@ -17,10 +17,8 @@ module.exports = function(app) {
 		.put(users.update)
 		.delete(users.delete);
 	//Get using request param 'userId' to retrieve goals for one user
-	//Put to update an existing user's goals
 	app.route('/api/users/:userId/goals')
-		.get(users.readGoals)
-		.put(users.updateGoals);
+		.get(users.readGoals);
 	//Get to retrieve registration page
 	//Post to register a user
 	app.route('/register')

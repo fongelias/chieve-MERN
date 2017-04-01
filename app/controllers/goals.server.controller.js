@@ -95,9 +95,39 @@ curl -X PUT -H "Content-Type: application/json" -d '{"name": "UpdatedName"}' loc
 */
 exports.update = function(req, res) {
 	var goal = req.goal;
-	goal.title = req.body.title;
-	goal.description = req.body.description;
-	goal.completed = req.body.completed;
+	if (req.body.title) {
+		goal.title = req.body.title;
+	}
+
+	if (req.body.description) {
+		goal.description = req.body.description;
+	}
+	
+	console.log(req.body.completed);
+	if(req.body.completed) {
+		goal.completed = Date.now();
+		//Update User to reflect this completion
+		User.findByIdAndUpdate(
+			goal.creator,
+			{$pull: {"currentGoals" : goal._id}},
+			{safe: true, upsert: true},
+		    function(err, model) {
+		    	console.log('Goals.update.User.findByIdAndUpdate($pull)');
+		        console.log(err);
+		    }
+		);
+
+		User.findByIdAndUpdate(
+			goal.creator,
+			{$push: {"completedGoals" : goal._id}},
+			{safe: true, upsert: true},
+		    function(err, model) {
+		    	console.log('Goals.update.User.findByIdAndUpdate($push)');
+		        console.log(err);
+		    }
+		);
+	}
+
 
 	goal.save(function(err) {
 		if (err) {

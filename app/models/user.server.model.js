@@ -29,6 +29,10 @@ var UserSchema = new Schema({
 	currentGoals: [{
 		type: Schema.ObjectId,
 		ref: 'Goal'
+	}],
+	completedGoals: [{
+		type: Schema.ObjectId,
+		ref: 'Goal'
 	}] 
 });
 

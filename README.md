@@ -17,16 +17,19 @@
 			- [x] Test adding the goal to its owner
 			- [x] Test adding a goal to its task
 			- [x] Test adding a task to its goal
-			- [ ] Return a user's goals
-			- [ ] Update a user's goals
-			- [ ] Delete a goal and remove its associated tasks, and 
-				  remove it from the user
-			- [ ] Delete a task and remove its associated goal
+			- [x] Return a user's goals
+			- [x] Update a user's goals
+			- [x] "Complete a goal" by moving it from the user's list 
+				  to another list
+			- [ ] "Delete a goal" by removing its associated tasks, and 
+				  removing it from the user
+			- [ ] Delete a task and remove it from the associated goal
 		- [x] Add Goal controller
 - [ ] Dashboard React
 	- [ ] Gulp for React
 - [ ] Dashboard API
 - [x] Favicon
+- [ ] Secure API routes torus/.env file/secrets
 - [ ] Social sharing
 - [ ] Search Goals
 - [ ] Set Permissions
