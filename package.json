@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/fongelias/meanpractice#readme",
   "dependencies": {
+    "async": "^2.2.0",
     "body-parser": "^1.16.1",
     "browserify": "^14.1.0",
     "connect-flash": "^0.1.1",

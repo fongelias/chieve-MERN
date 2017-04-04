@@ -9,6 +9,7 @@
 	- [x] Sign Up
 	- [ ] FB
 	- [ ] Onboard Sign Up
+		- [ ] Ajax for onboarding registration
 		- [x] Add ajax form in dashboard to Test API routes
 		- [x] Test API routes for adding a task
 		- [ ] Test API routes for reading the tasks of the user
@@ -18,7 +19,7 @@
 			- [x] Test adding a goal to its task
 			- [x] Test adding a task to its goal
 			- [x] Return a user's goals
-			- [ ] Return a goal's tasks
+			- [x] Return a goal's tasks
 			- [x] Update a user's goals
 			- [x] "Complete a goal" by moving it from the user's list 
 				  to another list
@@ -26,6 +27,7 @@
 				  removing it from the user
 			- [ ] Delete a task and remove it from the associated goal
 		- [x] Add Goal controller
+		- [x] Test using npm async for batch saving tasks
 - [ ] Dashboard React
 	- [ ] Gulp for React
 - [ ] Dashboard API

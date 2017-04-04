@@ -3,8 +3,17 @@ var User = require('mongoose').model('User');
 var Goal = require('mongoose').model('Goal');
 var Task = require('mongoose').model('Task');
 var passport = require('passport');
+var parallel = require('async/parallel');
 
 //Private Functions===========================================================
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
 var getErrorMessage = function(err) {
 	var message = '';
 	if (err.code) {
@@ -28,6 +37,14 @@ var getErrorMessage = function(err) {
 };
 
 //Exports======================================================================
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
 //Return a user's goals
 exports.readGoals = function(req, res, next) {
 	Goal.find({
@@ -42,19 +59,14 @@ exports.readGoals = function(req, res, next) {
 	});
 }
 
-
-//Update a user's goals
-exports.updateGoals = function(req, res, next) {
-	/*User.findByIdAndUpdate(req.user.id, req.body, function(err,user) {
-		if (err) {
-			return next(err);
-		} else {
-			res.json(user);
-		}
-	})*/
-}
-
-
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
 //Serve login page
 exports.renderLogin = function(req, res, next) {
 	if (!req.user) {
@@ -67,7 +79,14 @@ exports.renderLogin = function(req, res, next) {
 	}
 };
 
-
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
 //Serve register page
 exports.renderRegister = function(req, res, next) {
 	if (!req.user) {
@@ -81,6 +100,14 @@ exports.renderRegister = function(req, res, next) {
 };
 
 
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
 //Uses User model to create new users based on HTTP request body. Local Auth
 exports.register = function(req, res, next) {
 	if (!req.user) {
@@ -95,14 +122,83 @@ exports.register = function(req, res, next) {
 				return res.json({success: false, message: err, nextUrl: '/register'});
 			}
 
+			//Add a parallel here and nest it in
 			//"req.login" method from passport module
 			req.login(user, function(err) {
 				if (err) {
 					return next(err);
 				}
-
-				return res.json({success: true, message: err, nextUrl: '/dashboard'});
 			});
+
+			//Save Goal
+			var goal = new Goal({"title": req.body.goalTitle});
+			goal.creator = req.user;
+			goal.save(function(err) {
+				if (err) {
+					console.log(err);
+					return res.status(400).send({
+						message: getErrorMessage(err)
+					});
+				} else {
+					parallel([
+					    function(callback) {
+					    	//Update User to reflect new goal
+					    	User.findByIdAndUpdate(
+								req.user._id,
+								{$push: {"currentGoals" : goal._id}},
+								{safe: true, upsert: true},
+							    function(err, model) {
+							        console.log(err);
+							        callback(err, true);
+							    }
+							);
+					    },
+					    function(callback) {
+					    	//Used to activate callback
+					    	var tasks_length = req.body.tasks.length;
+					    	//Create Tasks
+					    	for (i = 0; i < req.body.tasks.length; i++) {
+					    		var task = new Task();
+								task.goal = goal._id;
+								task.title = req.body.tasks[i];
+								task.save(function(err) {
+									if (err) {
+										console.log(err);
+										callback(err, true);
+									} else {
+										//Update Goal to reflect new task
+										Goal.findByIdAndUpdate(
+											goal._id,
+											{$push: {"tasks" : task._id}},
+											{safe: true, upsert: true},
+										    function(err, model) {
+										        console.log(err);
+										        tasks_length--;
+										        if (tasks_length == 0) {
+										        	callback(err, true);
+										        }
+										    }
+										);
+									}
+								});
+					    	}
+					    }
+					],
+					// optional callback
+					function(err, results) {
+					    // the results array will equal [true, true] if parallel functions worked
+					    if (results[0] && results[1]) {
+					    	return res.json({success: true, message: err, nextUrl: '/dashboard'});
+					    } else {
+					    	console.log(err);
+					    	return res.status(400).send({
+								message: getErrorMessage(err)
+							});
+					    }
+					});
+				}
+			});
+
 		});
 	} else {
 		return res.json({success: true, nextUrl: '/dashboard'});
@@ -145,7 +241,14 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 };
 
 
-
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
 //Logout user
 exports.logout = function(req, res) {
 	req.logout();
@@ -154,6 +257,14 @@ exports.logout = function(req, res) {
 
 
 //CRUD-------------------------------------------------------------------------
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
 //Takes a json object and saves it as a new user
 /* Example:
 $ curl -X POST -H "Content-Type: application/json" -d '{"name": "Kevin", "email": "kevin@mitnick.com", "username": "Condor", "password": "AintNoBodyGotTimeForGoodPa$words!!!"}' localhost:1337/users
@@ -171,6 +282,14 @@ exports.create = function(req, res, next) {
 }
 
 
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
 //Lists all existing users
 exports.list = function(req, res, next) {
 	User.find({}, function(err, users) {
@@ -183,12 +302,28 @@ exports.list = function(req, res, next) {
 }
 
 
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
 //Returns JSON representation of req.user object. 
 exports.read = function(req, res) {
 	res.json(req.user);
 }
 
 
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
 //Populates req.user object, used as middleware 
 exports.userByID = function(req, res, next, id) {
 	User.findOne({
@@ -206,6 +341,14 @@ exports.userByID = function(req, res, next, id) {
 };
 
 
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
 //Updates user by ID
 /* Example:
 curl -X PUT -H "Content-Type: application/json" -d '{"name": "UpdatedName"}' localhost:1337/users/[_id]
@@ -221,6 +364,14 @@ exports.update = function(req, res, next) {
 }
 
 
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
 //Deletes user by ID
 /*Example:
 $ curl -X DELETE localhost:1337/users/[id]
@@ -236,6 +387,14 @@ exports.delete = function(req, res, next) {
 }
 
 
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
 //Middleware checking whether a user is currently authenticated
 exports.requiresLogin = function(req, res, next) {
 	if (!req.isAuthenticated()) {
