@@ -24,6 +24,9 @@ module.exports = function(app) {
 	app.route('/register')
 		.get(users.renderRegister)
 		.post(users.register);
+	//Post to register a user with a goal and list of tasks
+	app.route('/register/onboard')
+		.post(users.onboardRegister);
 	//Get to retrieve login page
 	//Post to authenticate user locally and redirect them
 	app.route('/login')

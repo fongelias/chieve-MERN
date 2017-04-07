@@ -102,6 +102,7 @@ $(document).ready(function() {
 	var goalInputNextStep = $("#landing-goal-scroll-right-arrow");
 
 	goalInputNextStep.click(function() {
+		$('#goal-store').text($('#first-goal').val());
 		//Hide elements from current page
 		goalInputNextStep.addClass("exit-right");
 		$("#title-input-text").addClass("exit-left");
@@ -129,7 +130,14 @@ $(document).ready(function() {
 
 
 	/*-- Add new Task Button Event Listener --*/
+	var taskHtml = '<div class="task-container">'
+					+	'\t<div class="input-line">'
+					+		'\t\t<input type="text" placeholder="create a new task" class="task-input" tabindex="-4">'
+					+	'\t</div>'
+					+'</div>';
+
 	$("#landing-task-list .add-button").click(function() {
+		$('#landing-task-list .task-list').append(taskHtml);
 		//Scroll down the view a little to accomodate for the longer list
 		var currentScrollTop = body.scrollTop();
 		body.animate({ scrollTop:currentScrollTop + 54}, 1000);
@@ -230,6 +238,56 @@ $(document).ready(function() {
 			$("#landing-sign-in-error").html("Passwords don't match!");
 		}
 	});
+
+
+
+	/*-- Onboarding Sign Up --*/
+	//Retrieves tasks for sign-up form
+	function tasksToArray() {
+		var DOM_tasks = document.getElementsByClassName('task-input');
+		var tasks = [];
+		for(i = 0; i < DOM_tasks.length; i++) {
+			if (DOM_tasks[i].value != "") {
+				tasks.push(DOM_tasks[i].value)
+			}
+		}
+
+		return tasks;
+	};
+
+
+	$("#landing-sign-up .round-button").click(function() {
+		//Password Check
+		if($('#landing-sign-up .password').val() == $('#landing-sign-up .confirm-password').val()) {
+			$.ajax({
+	        	type : "POST",
+				url : "./register/onboard",
+				data : { 
+					email: $('#landing-sign-up .email').val(),
+					username: $('#landing-sign-up .email').val(),
+					password: $('#landing-sign-up .password').val(),
+					goalTitle: $('#first-goal').val(),
+					tasks: tasksToArray()
+				},
+				success : function(data) {
+					console.log(data);
+					if (data.success) {
+						window.location.href = "." + data.nextUrl;
+					} else {
+						$("#landing-sign-up-error").html("Network error! Please try again");	
+					}
+				},
+				error: function (xhRequest, ErrorText, thrownError) {
+					console.log(xhRequest);
+					console.log('ErrorText: ' + ErrorText);
+					console.log('thrownError: ' + thrownError);
+				}
+			});
+		} else {
+			$("#landing-sign-up-error").html("Passwords don't match!");
+		}
+	});
+
 
 
 

@@ -99,6 +99,40 @@ exports.renderRegister = function(req, res, next) {
 	}
 };
 
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
+ //Uses User model to create new users based on HTTP request body. Local Auth
+exports.register = function(req, res, next) {
+	if (!req.user) {
+		console.log(req.body);
+		var user = new User(req.body);
+		var message = null;
+		user.provider = 'local';
+		user.save(function(err) {
+			if (err) {
+				var message = getErrorMessage(err);
+				req.flash('error', message);
+				return res.json({success: false, message: err, nextUrl: '/register'});
+			}
+
+			req.login(user, function(err) {
+				if (err) {
+					return next(err);
+				}
+			});
+
+			return res.json({success: true, message: err, nextUrl: '/dashboard'});
+		});
+  	} else {
+		return res.json({success: true, nextUrl: '/dashboard'});
+	}
+};
 
 /*X------XX------XX------XX------XX------XX------XX------XX------XX------X
  *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
@@ -108,8 +142,9 @@ exports.renderRegister = function(req, res, next) {
  *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
  *X------XX------XX------XX------XX------XX------XX------XX------XX------X
  */
-//Uses User model to create new users based on HTTP request body. Local Auth
-exports.register = function(req, res, next) {
+//Uses User model to create new users based on HTTP request body. Local Auth.
+//Adds a goal and a set of tasks.
+exports.onboardRegister = function(req, res, next) {
 	if (!req.user) {
 		console.log(req.body);
 		var user = new User(req.body);

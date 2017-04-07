@@ -40,7 +40,7 @@
 		<!-- Arrow from page 1 -->
 		<div id="landing-scroll-down-arrow" class="scroll-down-arrow bounce"></div>
 		<!-- Arrow from page 2 -->
-		<div id="landing-goal-scroll-right-arrow" ng-click="storeGoal(goal)">
+		<div id="landing-goal-scroll-right-arrow">
 			<p class="text small">plan your next steps</p>
 			<div class="inner-container">
 				<div class="scroll-right-arrow"></div>
@@ -48,15 +48,15 @@
 		</div>
 		<!-- Page 3 -->
 		<section id="landing-task-list">
-			<h2 class="text medium">What tasks do you need to complete to reach <span class="text grey">{{ goal_store.title }}</span>?</h2>
-			<div data-ng-repeat="task in tasks_store">
+			<h2 class="text medium">What tasks do you need to complete to reach <span class="text grey" id="goal-store"></span>?</h2>
+			<div class="task-list">
 				<div class="task-container">
 					<div class="input-line">
-						<input type="text" placeholder="create a new task" ng-model="task.name" class="task-input" tabindex="-4">
+						<input type="text" placeholder="create a new task" class="task-input" tabindex="-4">
 					</div>
 				</div>
 			</div>
-			<div class="add-button" ng-click="addNewTask()">
+			<div class="add-button">
 				<div class="line-1"></div>
 				<div class="line-2"></div>
 			</div>
@@ -71,14 +71,19 @@
 		<section id="landing-sign-up">
 			<h2 class="text medium">Sign up and begin achieving:</h2>
 			<div class="user-info-input">
-				<input type="email" placeholder="email" ng-model="user.email" tabindex="-1">
+				<input class="email" type="email" placeholder="email" tabindex="-1">
 				<div class="focus-effect-object"></div>
 			</div>
 			<div class="user-info-input">
-				<input type="password" placeholder="password" ng-model="user.pass" tabindex="-2">
+				<input class="password" type="password" placeholder="password" tabindex="-2">
 				<div class="focus-effect-object"></div>
 			</div>
-			<button class="round-button" ng-click="signUp(user)" tabindex="-3">GET STARTED</button>
+			<div class="user-info-input">
+				<input class="confirm-password" type="password" placeholder="confirm password" tabindex="-2">
+				<div class="focus-effect-object"></div>
+			</div>
+			<div id="landing-sign-up-error" class="error-message small text red"><%= messages[0] %></div>
+			<button class="round-button" tabindex="-3">GET STARTED</button>
 		</section>
 		<!-- Log-in Link -->
 		<a id="landing-sign-in-link" tabindex="-4" href="javascript:void(0)">SIGN IN</a>

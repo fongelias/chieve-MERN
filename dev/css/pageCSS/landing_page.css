@@ -259,6 +259,13 @@ view
 		margin-top: 1rem;
 		margin-bottom: 4rem;
 	}
+
+	#landing-sign-up-container .error-message {
+		margin-bottom: 1.5rem;
+		height: 1.8rem;
+	}
+
+	
 	/*-- Sign In --*/
 	#landing-sign-in-link {
 		position: fixed;

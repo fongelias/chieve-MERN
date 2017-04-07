@@ -369,6 +369,11 @@ body {
 			border: 2px solid #092352;
 		}
 
+		.round-button.white-outline:active {
+			background-color: rgba(9,35,82,0.48);
+			color: black;
+		}
+
 		/*--- Styles ---*/
 		.round-button.white-outline {
 			background-color: rgba(255,255,255,0);
