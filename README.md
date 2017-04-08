@@ -29,7 +29,8 @@
 - [ ] Delete a task and remove it from the associated goal
 - [ ] Test API routes for reading the tasks of the user
 - [ ] Dashboard React
-	- [ ] Gulp for React
+	- [X] Webpack for React
+	- [ ] Rebuild previous Dashboard UI into react jsx
 - [ ] Dashboard API
 - [x] Favicon
 - [ ] Secure API routes torus/.env file/secrets
