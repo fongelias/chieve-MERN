@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server",
-    "prestart": "gulp"
+    "prestart": "webpack && gulp"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,9 @@
   "homepage": "https://github.com/fongelias/meanpractice#readme",
   "dependencies": {
     "async": "^2.2.0",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "babel-preset-react": "^6.24.1",
     "body-parser": "^1.16.1",
     "browserify": "^14.1.0",
     "connect-flash": "^0.1.1",
@@ -47,10 +50,12 @@
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
+    "path": "^0.12.7",
     "pump": "^1.0.2",
     "reactify": "^1.1.1",
     "run-sequence": "^1.2.2",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.9.0"
+    "watchify": "^3.9.0",
+    "webpack": "^2.3.3"
   }
 }
