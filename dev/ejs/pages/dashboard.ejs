@@ -5,38 +5,10 @@
 		<!-- build:css /css/dashboard.min.css -->
 		<link rel="stylesheet" href="../../../dev/css/mainCSS/normalize.css"></link>
 	    <link rel="stylesheet" href="../../../dev/css/mainCSS/chieveBase.css"></link>
+	     <link rel="stylesheet" href="../../../dev/css/pageCSS/dashboard.css"></link>
 		<!-- endbuild -->
 	</head>
 	<body>
-		<h1><%= title %></h1>
-		<script>
-			function makeCall() {
-				$.ajax({
-		        	type : "POST",
-					url : $('#input5').val(),
-					data : { 
-						$('#input1').val(): $('#input2').val(),
-						$('#input3').val(): $('#input4').val()
-					},
-					success : function(data) {
-						console.log(data);
-					},
-					error: function (xhRequest, ErrorText, thrownError) {
-						console.log(xhRequest);
-						console.log('ErrorText: ' + ErrorText);
-						console.log('thrownError: ' + thrownError);
-					}
-				});
-			}
-		</script>
-		<div>
-			<input type="text" id="input1"/>
-			<input type="text" id="input2"/>
-			<input type="text" id="input3"/>
-			<input type="text" id="input4"/>
-			<input type="text" id="input5"/>
-			<button onclick="makeCall()"></button>
-		</div>
 		<!--########## SCRIPTS ##########-->
 		<!--########## LIBRARIES ##########-->
 	    <!-- jQuery Library -->
