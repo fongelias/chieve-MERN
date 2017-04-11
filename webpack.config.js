@@ -4,7 +4,8 @@ const path = require('path');
 //Module==================================================================
 module.exports = {
 	entry: { //Where bundler starts
-		test: './dev/js/app/app_containers/test.jsx'
+		test: './dev/js/app/app_containers/test.jsx',
+		dashboard: './dev/js/app/app_containers/dashboard.jsx'
 	},
 	output: { //Where budled code is to be saved
 		path: path.resolve('dev/js/app/compiled_apps/'), 
