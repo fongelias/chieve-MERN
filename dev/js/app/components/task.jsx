@@ -28,14 +28,13 @@ var Task = React.createClass({
 			title: e.target.value
 		})
 	},
+	dragStart: function() {
+		console.log('dragStart');
+	},
 	render: function() {
 		console.log(this.state.title)
 		return (
-			<div className="task-container" 
-				draggable="true"
-				onDragEnd={this.props.dragEnd}
-				onDragStart={this.props.dragStart}
-				data-id={this.state.title}>
+			<div className="task-container" data-id={this.props.order}>
 				<div className={this.state.containerClass}>
 					<div className="contents">
 						<div className="input-line">

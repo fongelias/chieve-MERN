@@ -14,7 +14,8 @@ var DashboardApp = React.createClass({
 	render: function() {
 		var taskList = [
 			{title: "title1"},
-			{title: "title2"}
+			{title: "title2"},
+			{title: "title3"}
 		]
 
 		return (
