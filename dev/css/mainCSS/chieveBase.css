@@ -584,16 +584,25 @@ textarea.task-description {
 	font-family:  'OpenSans-Regular';
 }
 
-/*--- Directives ---*/
+/*--- Components ---*/
+	/*--- Task List ---*/
+	.placeholder {
+		background : rgb(255,240,120);
+	}
 
-	/*--- Drag Drop List ---*/
-	.drag-drop-container .inner-container {
+		.placeholder:before {
+			content: "Drop here";
+			color: rgb(225,210,90);
+		}
+
+	/*--- Task ---*/
+	.task-container .inner-container {
 		position: relative;
 		width: 40rem;
 		padding-top: 1rem;
 	}
 
-	.drag-drop-container .inner-container .more-options {
+	.task-container .inner-container .more-options {
 		position: absolute;
 		top: 0rem;
 		right: -2rem;
