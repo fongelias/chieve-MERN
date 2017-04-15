@@ -10,11 +10,6 @@ view
 	state changes more descriptive, and potentially more interchangable. */
 
 /*--- Text ---*/
-.text.title-header {
-	font-size: 12.8rem;
-	font-weight: 400;
-}
-
 .text.title-pronounciation {
 	font-size: 3.2rem;
 	font-weight: 100;

@@ -19,8 +19,11 @@ var DashboardApp = React.createClass({
 		]
 
 		return (
-			<div>
-				<TaskList tasks={taskList}/>
+			<div className="flex justify">
+				<section>
+					<h1 className="text title-header margin-bottom-5">Tasks</h1>
+					<TaskList tasks={taskList}/>
+				</section>
 			</div>
 		)
 	}

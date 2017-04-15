@@ -45,6 +45,11 @@ helper classes, and states.
 		font-weight: 100;
 	}
 
+	.text.title-header {
+		font-size: 12.8rem;
+		font-weight: 400;
+	}
+
 	/*--- Colors ---*/
 	.text.grey {
 		color: #85888C;
@@ -67,12 +72,26 @@ helper classes, and states.
 		margin-top: 0rem;
 	}
 
+	.text.margin-bottom-5 {
+		margin-bottom: 5rem;
+	}
+
 
 /*--- Elements ---*/
 body {
 	font-family: 'Amiri-Regular';
+}
+
+/*--- Height & Width ---*/
+.full-stretch-vertical {
+	min-height:100vh;
+}
+
+/*--- Height & Width ---*/
+.hide-overflow {
 	overflow: hidden;
 }
+
 
 /*--- Flexbox ---*/
 .flex { /*Default Flexbox*/
@@ -623,7 +642,194 @@ textarea.task-description {
 		.open-option .contents {
 			height: 10.8rem;
 		}
-		
+	
+	/*--- Nav ---*/
+	nav {
+		position: fixed;
+		top: 0rem;
+		right: 0rem;
+		height: 100%;
+		/*animation*/
+		transition-timing-function: all ease 0.3s;
+		-webkit-transition: all ease 0.3s; /* Safari */
+		transition: all ease 0.3s;
+	}
+
+	@media (max-width: 736px) {
+		nav {
+			right: -4.6rem;
+		}
+
+		.nav-open nav {
+			right: 0rem;
+		}
+	}
+
+	.nav-panel {
+		background-color: white;
+		height: 100%;
+		width: 5rem;
+		border-left: 1px solid #d7d7d7;
+	}
+
+	nav ul {
+		position: absolute;
+		top: 0rem;
+		margin: 0rem;
+		padding-left: 0rem;
+		list-style-type: none;
+		font-family:  'Rubik-Medium';
+	}
+
+	nav ul li {
+		height: 10rem;
+		width: 5rem;
+	}
+
+	nav ul li p {
+		font-size: 2.2rem;
+		-webkit-transform: translateY(50px) rotate(90deg);
+		   -moz-transform: translateY(50px) rotate(90deg);
+		     -o-transform: translateY(50px) rotate(90deg);
+	}
+
+	nav ul li p a {
+		text-decoration: none;
+		color: black;
+		margin-left: 2px ;
+		/*animation*/
+		transition-timing-function: all ease 0.3s;
+		-webkit-transition: all ease 0.3s; /* Safari */
+		transition: all ease 0.3s;
+	}
+
+	nav ul li p a:hover {
+		text-shadow: 2px 2px #d7d7d7;
+		margin-left: 1px;
+		margin-right: 1px;
+		/*animation*/
+		transition-timing-function: all ease 0.1s;
+		-webkit-transition: all ease 0.1s; /* Safari */
+		transition: all ease 0.1s;
+	}
+
+	nav ul li p a:active {
+		text-shadow: 0px 0px #d7d7d7;
+		margin-left: 0px;
+		margin-right: 0px;
+		/*animation*/
+		transition-timing-function: all ease 0.1s;
+		-webkit-transition: all ease 0.1s; /* Safari */
+		transition: all ease 0.1s;
+	}
+
+
+
+		/* ++++++++++++Javacript Applied Classes+++*/
+
+		/* ---Open Nav Button---*/
+		#open-nav-button {
+			position: absolute;
+			top: 0rem;
+			left: -4.5rem;
+			height: 4.5rem;
+			width: 4.5rem;
+			background-color: white;
+			border: 1px solid #d7d7d7;
+			border-right: 0px; 
+			border-top: 0px;
+			border-radius: 0rem 0rem 0rem 1rem;
+		}
+
+		#open-nav-button:hover {
+			background-color: #f0f0f0;
+		}
+
+		@media (min-width: 737px) {
+			#open-nav-button {
+				display: none;
+			}
+		}
+
+		#open-nav-button .bar-1 {
+			position: absolute;
+			left: 0.75rem;
+			top: 1.6rem;
+			height: 0.5rem;
+			width: 1.5rem;
+			background-color: #d7d7d7;
+			border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+			-webkit-transform: rotate(135deg);
+			   -moz-transform: rotate(135deg);
+			     -o-transform: rotate(135deg);
+			/*animation*/
+			transition-timing-function: all ease 0.5s;
+			-webkit-transition: all ease 0.5s; /* Safari */
+			transition: all ease 0.5s;
+		}
+
+		#open-nav-button .bar-2 {
+			position: absolute;
+			left: 0.75rem;
+			top: 2.4rem;
+			height: 0.5rem;
+			width: 1.5rem;
+			background-color: #d7d7d7;
+			border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+			-webkit-transform: rotate(-135deg);
+			   -moz-transform: rotate(-135deg);
+			     -o-transform: rotate(-135deg);
+			/*animation*/
+			transition-timing-function: all ease 0.5s;
+			-webkit-transition: all ease 0.5s; /* Safari */
+			transition: all ease 0.5s;
+		}
+
+			/* ++++++++++++Javacript Applied Classes+++*/
+			.nav-open #open-nav-button.bar-1 {
+				top: 2rem;
+				height: 0.5rem;
+				width: 3rem;
+				-webkit-transform: rotate(45deg);
+				   -moz-transform: rotate(45deg);
+				     -o-transform: rotate(45deg);
+			}
+
+			.nav-open #open-nav-button.bar-2 {
+				top: 2rem;
+				height: 0.5rem;
+				width: 3rem;
+				-webkit-transform: rotate(-45deg);
+				   -moz-transform: rotate(-45deg);
+				     -o-transform: rotate(-45deg);
+			}
+
+
+	/* --- Scroll Bar---*/
+	::-webkit-scrollbar {
+		width: 10px;
+		/*animation*/
+		transition-timing-function: all ease 13s;
+		-webkit-transition: all ease 13s; /* Safari */
+		transition: all ease 13s;
+	}
+
+	::-webkit-scrollbar:hover {
+		width: 15px;
+		/*animation*/
+		transition-timing-function: all 13s;
+		-webkit-transition: all 13s; /* Safari */
+		transition: all 13s;
+	}
+
+	::-webkit-scrollbar-track {
+		background: #f0f0f0;
+	}
+	 
+	::-webkit-scrollbar-thumb {
+	    background: #000000;
+	}
+
 /*-- Animations --*/
 	/*-- Animation Ease Transition--*/
 	.ease {

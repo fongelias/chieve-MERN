@@ -9,8 +9,9 @@
 		<!-- endbuild -->
 	</head>
 	<body>
-		<div id="dashboardApp">
+		<div id="dashboardApp" class="full-stretch-vertical">
 		</div>
+		<%- include ./partials/nav.ejs %>
 		<!--########## SCRIPTS ##########-->
 		<!--########## LIBRARIES ##########-->
 	    <!-- Fetch Polyfill -->
@@ -22,6 +23,7 @@
 	    <!--########## CUSTOM ##########-->
 	    <!-- build:js /js/pages/dashboard.min.js -->
 		 <script type="text/javascript" src="../../../dev/js/app/compiled_apps/dashboard.js"></script>
+		 <script type="text/javascript" src="../../../dev/js/partials/nav.js"></script>
 		<!-- endbuild -->
 	</body>
 </html>
