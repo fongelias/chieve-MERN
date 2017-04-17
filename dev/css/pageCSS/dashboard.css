@@ -6,3 +6,102 @@ view
 */
 
 /*--- Text ---*/
+.objective-title {
+	font-size: 7.5rem;
+	width: 40rem;
+	font-weight: 400;
+	line-height: 14.7rem;
+	margin-top: 8.576rem;
+	padding-top: 1.4rem;
+	text-align: right;
+}
+
+/*--- Containers ---*/
+.objective-view {
+	z-index: 1;
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+}
+
+	.open-objective-view .objective-view {
+		visibility: visible;
+		opacity: 1;
+	}
+
+/*--- Objective ---*/
+#dashboard-objective-overlay {
+	top: 14.5rem;
+	right: calc((100vw - 40rem) / 2);
+	/*animation*/
+	transition-timing-function: all ease 1s;
+	-webkit-transition: all ease 1s; /* Safari */
+	transition: all ease 1s;
+}
+
+	/*# JS applied states #*/
+	.open-objective-view #dashboard-objective-overlay {
+		z-index: 1;
+		top: calc(14.5rem - (150vw));
+		right: calc((100vw - 40rem) / 2 - (150vw));
+		height: calc(2 * 150vw);
+		width: calc(2 * 150vw);
+		visibility: visible;
+		opacity: 1;
+	}
+
+	/*--- Special positioning ---*/
+	.objective-link {
+		position: absolute;
+	    display: inline-block;
+	    top: 9.1rem;
+	    right: 0rem;
+	    font-size: 1.8rem;
+	    color: #969a9f;
+	    cursor: pointer;
+	    /*animation*/
+		transition-timing-function: all ease 0.3s;
+		-webkit-transition: all ease 0.3s; /* Safari */
+		transition: all ease 0.3s;
+	}
+
+		.objective-link:hover {
+			font-size: 2.1rem;
+			top: 8.9rem;
+			right: -1rem;
+		}
+
+		.objective-link:active {
+			color: #d7d7d7;
+		}
+
+	.tasks-link {
+		position: absolute;
+	    display: inline-block;
+	    top: 17.7rem;
+	    font-size: 1.8rem;
+	    color: #787b7f;
+	    cursor: pointer;
+	    /*animation*/
+		transition-timing-function: all ease 0.3s;
+		-webkit-transition: all ease 0.3s; /* Safari */
+		transition: all ease 0.3s;
+	}
+
+		.tasks-link:hover {
+			font-size: 2.1rem;
+			top: 17.4rem;
+			left: -0.2rem;
+		}
+
+		.tasks-link:active {
+			color: #d7d7d7;
+		}
+
+
+
+
+
+
+
