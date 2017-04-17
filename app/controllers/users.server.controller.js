@@ -432,6 +432,7 @@ exports.delete = function(req, res, next) {
  */
 //Middleware checking whether a user is currently authenticated
 exports.requiresLogin = function(req, res, next) {
+	console.log(req.isAuthenticated());
 	if (!req.isAuthenticated()) {
 		/*return res.status(401).send({
 			message: 'User is not logged in'

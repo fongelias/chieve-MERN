@@ -19,6 +19,9 @@ module.exports = function(app) {
 	//Get using request param 'userId' to retrieve goals for one user
 	app.route('/api/users/:userId/goals')
 		.get(users.readGoals);
+	//Get to retrieve goals for a logged in user
+	app.route('/user/goals')
+		.get(users.requiresLogin, users.readGoals);
 	//Get to retrieve registration page
 	//Post to register a user
 	app.route('/register')

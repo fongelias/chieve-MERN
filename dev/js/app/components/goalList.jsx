@@ -3,7 +3,7 @@ var React = require('react');
 var Task = require('../components/task.jsx');
 
 //Module
-var TaskList = React.createClass({
+var GoalList = React.createClass({
 	getInitialState: function() {
 		return {
 			goals: this.props.goals
@@ -17,3 +17,5 @@ var TaskList = React.createClass({
 		)
 	}
 })
+
+module.exports = GoalList;

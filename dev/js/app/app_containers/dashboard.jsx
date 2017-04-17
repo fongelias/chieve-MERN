@@ -8,6 +8,20 @@ var GoalList = require('../components/goalList.jsx');
 //Module
 var DashboardApp = React.createClass({
 	getInitialState: function() {
+
+		fetch('/user/goals', {
+			credentials: 'same-origin',
+			headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json'
+			}
+		}).then(function(response) {
+			return response.json();
+		}).then(function(json) {
+			console.log(json);
+		})
+
+
 		return {
 			stateClass: ""
 		}
@@ -22,6 +36,12 @@ var DashboardApp = React.createClass({
 			{title: "title1"},
 			{title: "title2"},
 			{title: "title3"}
+		]
+
+		var goalList = [
+			{title: "titlea"},
+			{title: "titleb"},
+			{title: "titlec"}
 		]
 
 

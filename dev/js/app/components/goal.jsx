@@ -2,7 +2,7 @@
 var React = require('react');
 
 //Module
-var Task = React.createClass({
+var Goal = React.createClass({
 	getInitialState: function() {
 		return {
 			title: this.props.goal.title,
@@ -15,3 +15,5 @@ var Task = React.createClass({
 		)
 	}
 })
+
+module.exports = Goal;
