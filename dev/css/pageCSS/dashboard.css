@@ -35,9 +35,9 @@ view
 	top: 14.5rem;
 	right: calc((100vw - 40rem) / 2);
 	/*animation*/
-	transition-timing-function: all ease 1s;
-	-webkit-transition: all ease 1s; /* Safari */
-	transition: all ease 1s;
+	transition-timing-function: all ease 0.5s;
+	-webkit-transition: all ease 0.5s; /* Safari */
+	transition: all ease 0.5s;
 }
 
 	/*# JS applied states #*/

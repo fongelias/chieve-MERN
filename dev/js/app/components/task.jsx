@@ -5,7 +5,6 @@ var React = require('react');
 var Task = React.createClass({
 	getInitialState: function() {
 		return {
-			title: this.props.task.title,
 			containerClass: 'inner-container'
 		};
 	},
@@ -28,9 +27,6 @@ var Task = React.createClass({
 			title: e.target.value
 		})
 	},
-	dragStart: function() {
-		console.log('dragStart');
-	},
 	render: function() {
 		console.log(this.state.title)
 		return (
@@ -41,7 +37,7 @@ var Task = React.createClass({
 							<input type="text" 
 								placeholder="create a new task" 
 								className="task-input left"
-								value={this.state.title} 
+								value={this.props.task.title} 
 								onChange={this.updateTitle} />
 						</div>
 						<div className="expanded-info">

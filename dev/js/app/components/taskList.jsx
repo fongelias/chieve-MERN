@@ -6,9 +6,7 @@ var Task = require('../components/task.jsx');
 //Module
 var TaskList = React.createClass({
 	getInitialState: function() {
-		return {
-			tasks: this.props.tasks
-		}
+		return {}
 	},
 	noResultsHTML : function() {
 		return <h1>No Tasks</h1>
@@ -18,8 +16,8 @@ var TaskList = React.createClass({
 		return (
 			<div className="task-list">
 				{
-					this.state.tasks.map(function(item, i){
-						return <Task task={item} order={i}/>
+					this.props.tasks.map(function(item, i){
+						return <Task task={item} key={item.id} order={i}/>
 					})
 				}
 			</div>

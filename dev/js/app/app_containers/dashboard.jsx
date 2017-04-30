@@ -4,10 +4,42 @@ var ReactDOM = require('react-dom');
 var TaskList = require('../components/taskList.jsx');
 var GoalList = require('../components/goalList.jsx');
 
+//Helper Functions
+function updateObjInArr(arr, obj) {
+	var id = obj._id;
+	console.log("updateObjInArr(" + id + ")");
+	var index = -1;
+	var resultArr = arr;
+	for(var i = 0; i < arr.length; i++) {
+		if(arr[i]._id == id) {
+			index = i;
+			break;
+		}
+	}
+
+	if(index == -1) {
+		console.log("No Such Object Exists");	
+	} else {
+		resultArr[i] = obj;
+	}
+
+	return resultArr;
+}
+
+
+
 
 //Module
 var DashboardApp = React.createClass({
 	getInitialState: function() {
+
+		return {
+			stateClass: "",
+			goalList: []
+		}
+	},
+	componentDidMount: function() {
+		var _this = this;
 
 		fetch('/user/goals', {
 			credentials: 'same-origin',
@@ -19,16 +51,20 @@ var DashboardApp = React.createClass({
 			return response.json();
 		}).then(function(json) {
 			console.log(json);
+			_this.setState({
+				goalList: json
+			})
 		})
-
-
-		return {
-			stateClass: ""
-		}
 	},
 	updateStateClass: function(classStr) {
 		this.setState({
 			stateClass: classStr
+		})
+	},
+	updateGoal: function(obj) {
+		var newGoals = updateObjInArr(this.state.goalList, obj);
+		this.setState({
+			goalList: newGoals
 		})
 	},
 	render: function() {
@@ -37,14 +73,6 @@ var DashboardApp = React.createClass({
 			{title: "title2"},
 			{title: "title3"}
 		]
-
-		var goalList = [
-			{title: "titlea"},
-			{title: "titleb"},
-			{title: "titlec"}
-		]
-
-
 
 		return (
 			<div className={this.state.stateClass}>
@@ -70,7 +98,7 @@ var DashboardApp = React.createClass({
 									this.updateStateClass("")
 								}.bind(this)} 
 								>Tasks</a>
-							<GoalList goals={goalList}/>
+							<GoalList goals={this.state.goalList} update={this.updateGoal}/>
 						</section>
 					</div>
 				</div>
