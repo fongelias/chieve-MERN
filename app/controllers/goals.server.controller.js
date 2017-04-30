@@ -109,6 +109,8 @@ exports.goalByID = function(req, res, next, id) {
 curl -X PUT -H "Content-Type: application/json" -d '{"name": "UpdatedName"}' localhost:1337/goals/[_id]
 */
 exports.update = function(req, res) {
+	console.log("goals.update()");
+	console.log(req.body);
 	var goal = req.goal;
 	if (req.body.title) {
 		goal.title = req.body.title;

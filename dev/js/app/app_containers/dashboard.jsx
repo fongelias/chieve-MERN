@@ -65,7 +65,19 @@ var DashboardApp = React.createClass({
 		var newGoals = updateObjInArr(this.state.goalList, obj);
 		this.setState({
 			goalList: newGoals
-		})
+		});
+
+		console.log(JSON.stringify(obj));
+		//Update DB
+		fetch('/api/goals/' + obj._id, {
+			credentials: 'same-origin',
+			method: 'put',
+			headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json'
+			},
+			body: JSON.stringify(obj)
+		});
 	},
 	render: function() {
 		var taskList = [
