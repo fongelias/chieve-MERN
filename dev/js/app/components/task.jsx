@@ -34,30 +34,46 @@ var Task = React.createClass({
 			_id: this.props.task._id
 		})
 	},
-	removeTask: function() {
+	deleteTask: function() {
+		console.log('task.deleteTask()');
+		//Added layer of to prevent event bubbling
 		if(this.state.containerClass.split(" ").indexOf("open-option") != -1) {
-			var _this = this;
-			var confirmMessage = "Deleted tasks cannot be recovered! Press OK to continue."
-			if(confirm(confirmMessage)){
-				this.setState({
-					containerClass: 'inner-container item-completed fade transition ease'
+			this.removeTask(false);
+		}
+	},
+	completeTask: function() {
+		console.log('task.completeTask()');
+		//Added layer of to prevent event bubbling
+		if(this.state.containerClass.split(" ").indexOf("open-option") != -1) {
+			this.removeTask(true);
+		}
+	},
+	removeTask: function(completedBool) {
+		console.log('task.removeTask()');
+		var _this = this;
+		var actionClass = completedBool ? 'item-completed' : 'item-deleted';
+		var confirmMessage = completedBool ? 
+			"Complete this task?" :
+			"Deleted tasks cannot be recovered! Press OK to continue.";
+		if(confirm(confirmMessage)){
+			this.setState({
+				containerClass: 'inner-container fade transition ease ' + actionClass
+			})
+
+			//Fade from UI
+			setTimeout(function(){
+				_this.setState({
+					containerClass: 'inner-container ease fade ' + actionClass
 				})
+			}, 1000);
 
-				//Fade from UI
-				setTimeout(function(){
-					_this.setState({
-						containerClass: 'inner-container item-completed ease fade'
-					})
-				}, 1000);
-
-				//Remove from State
-				setTimeout(function(){
-					_this.props.removeTask({
-						completed: false,
-						_id: _this.props.task._id
-					});
-				}, 3000);
-			}
+			//Remove from State
+			setTimeout(function(){
+				_this.props.removeTask({
+					completed: completedBool,
+					_id: _this.props.task._id
+				});
+			}, 3000);
 		}
 	},
 	render: function() {
@@ -79,15 +95,16 @@ var Task = React.createClass({
 								</textarea>
 						</div>
 					</div>
-					<div className="more-options" onClick={this.openOption}>
+					<div className="more-options" 
+						onClick={this.openOption}>
 						<div className="inner-container flex split">
-							<div className="option-container option-1">
+							<div className="option-container option-1" onClick={this.completeTask}>
 								<p>FIN</p>
 								<div className="circle-option">
 									<div className="inner-icon checkmark"></div>
 								</div>
 							</div>
-							<div className="option-container option-2" onClick={this.removeTask}>
+							<div className="option-container option-2" onClick={this.deleteTask}>
 								<p>DEL</p>
 								<div className="circle-option">
 									<div className="inner-icon x-cross"></div>

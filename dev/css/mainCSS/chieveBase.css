@@ -491,6 +491,10 @@ body {
 			background-color: #bbef94;
 		}
 
+		.item-deleted .circle-option {
+			background-color: #ff9f9f;
+		}
+
 		/*-- Pseudo --*/
 		.more-options:hover .circle-option {
 			margin-bottom: 0.1rem;
@@ -591,6 +595,14 @@ body {
 		color: #bbef94;
 	}
 
+	.item-deleted .input-line {
+		border-bottom: 2px solid #ff9f9f;
+	}
+
+	.item-deleted .input-line input {
+		color: #ff9f9f;
+	}
+
 	/* Used for inline input*/
 	.input-line.add-space {
 		margin-left: 1rem;
@@ -626,16 +638,15 @@ textarea.task-description {
 		border: 1px solid #bbef94;
 	}
 
-/*--- Components ---*/
-	/*--- Task List ---*/
-	.placeholder {
-		background : rgb(255,240,120);
+	.item-deleted textarea.task-description {
+		border: 1px solid #ff9f9f;
 	}
 
-		.placeholder:before {
-			content: "Drop here";
-			color: rgb(225,210,90);
-		}
+/*--- Components ---*/
+	/*--- Task List ---*/
+	.task-list {
+		width: 40rem;
+	}
 
 	/*--- Task ---*/
 	.task-container > .inner-container {
