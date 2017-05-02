@@ -12,12 +12,16 @@ var TaskList = React.createClass({
 		return <h1>No Tasks</h1>
 	},
 	render: function() {
-		console.log(this.state.tasks);
+		var _this = this;
 		return (
 			<div className="task-list">
 				{
 					this.props.tasks.map(function(item, i){
-						return <Task task={item} key={item.id} order={i}/>
+						return <Task 
+							task={item} 
+							key={item.id} 
+							order={i}
+							update={_this.props.update}/>
 					})
 				}
 			</div>

@@ -9,7 +9,6 @@ var GoalList = React.createClass({
 	},
 	render: function() {
 		var _this = this;
-		console.log(this.state.goals);
 		return (
 			<div className="goal-list">
 				{

@@ -5,11 +5,12 @@ var TaskList = require('../components/taskList.jsx');
 var GoalList = require('../components/goalList.jsx');
 
 //Helper Functions
-function updateObjInArr(arr, obj) {
-	var id = obj._id;
-	console.log("updateObjInArr(" + id + ")");
+/*----------------------------------------
+----Visual Delimiter Between Functions----
+----------------------------------------*/
+function indexOfObjWithIdInArr(arr, id) {
 	var index = -1;
-	var resultArr = arr;
+	
 	for(var i = 0; i < arr.length; i++) {
 		if(arr[i]._id == id) {
 			index = i;
@@ -17,16 +18,44 @@ function updateObjInArr(arr, obj) {
 		}
 	}
 
+	return index;
+}
+
+/*----------------------------------------
+----Visual Delimiter Between Functions----
+----------------------------------------*/
+function updateObjInArr(arr, obj) {
+	var id = obj._id;
+	console.log("updateObjInArr(" + id + ")");
+	var resultArr = arr;
+	var index = indexOfObjWithIdInArr(arr, id);
+
 	if(index == -1) {
 		console.log("No Such Object Exists");	
 	} else {
-		resultArr[i] = obj;
+		resultArr[index] = obj;
 	}
 
 	return resultArr;
 }
 
+/*----------------------------------------
+----Visual Delimiter Between Functions----
+----------------------------------------*/
+function removeObjInArr(arr, obj) {
+	var id = obj._id;
+	console.log("updateObjInArr(" + id + ")");
+	var resultArr = arr;
+	var index = indexOfObjWithIdInArr(arr, id);
 
+	if(index == -1) {
+		console.log("No Such Object Exists");	
+	} else {
+		resultArr.splice(index, 1);
+	}
+
+	return resultArr;
+}
 
 
 //Module
@@ -98,13 +127,25 @@ var DashboardApp = React.createClass({
 			body: JSON.stringify(obj)
 		});
 	},
-	render: function() {
-		var taskList = [
-			{title: "title1"},
-			{title: "title2"},
-			{title: "title3"}
-		]
+	updateTask: function(obj) {
+		var newTasks = updateObjInArr(this.state.taskList, obj);
+		this.setState({
+			taskList: newTasks
+		});
 
+		console.log(JSON.stringify(obj));
+		//Update DB
+		fetch('/api/tasks/' + obj._id, {
+			credentials: 'same-origin',
+			method: 'put',
+			headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json'
+			},
+			body: JSON.stringify(obj)
+		});
+	},
+	render: function() {
 		return (
 			<div className={this.state.stateClass}>
 				<div className="flex justify">
@@ -120,7 +161,8 @@ var DashboardApp = React.createClass({
 								<div id="dashboard-objective-overlay" 
 									className="black-overlay-expanding circle"></div>
 							</div>
-							<TaskList tasks={taskList}/>
+							<TaskList tasks={this.state.taskList}
+								update={this.updateTask}/>
 						</section>
 						<section className="objective-view">
 							<h1 className="text white objective-title margin-bottom-5">Objectives</h1>
@@ -129,7 +171,8 @@ var DashboardApp = React.createClass({
 									this.updateStateClass("")
 								}.bind(this)} 
 								>Tasks</a>
-							<GoalList goals={this.state.goalList} update={this.updateGoal}/>
+							<GoalList goals={this.state.goalList} 
+								update={this.updateGoal}/>
 						</section>
 					</div>
 				</div>

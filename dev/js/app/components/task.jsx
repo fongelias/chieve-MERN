@@ -5,7 +5,9 @@ var React = require('react');
 var Task = React.createClass({
 	getInitialState: function() {
 		return {
-			containerClass: 'inner-container'
+			containerClass: 'inner-container',
+			title: this.props.task.title,
+			id: this.props.task._id
 		};
 	},
 	openOption: function() {
@@ -26,9 +28,23 @@ var Task = React.createClass({
 		this.setState({
 			title: e.target.value
 		})
+
+		this.props.update({
+			title: e.target.value,
+			_id: this.state.id
+		})
+	},
+	updateDescription: function(e) {
+		this.setState({
+			description: e.target.value
+		})
+
+		this.props.update({
+			description: e.target.value,
+			_id: this.state.id
+		})
 	},
 	render: function() {
-		console.log(this.state.title)
 		return (
 			<div className="task-container" data-id={this.props.order}>
 				<div className={this.state.containerClass}>
@@ -41,7 +57,10 @@ var Task = React.createClass({
 								onChange={this.updateTitle} />
 						</div>
 						<div className="expanded-info">
-							<textarea className="task-description" ></textarea>
+							<textarea className="task-description"
+								value={this.props.task.description}
+								onChange={this.updateDescription}>
+								</textarea>
 						</div>
 					</div>
 					<div className="more-options" onClick={this.openOption}>
