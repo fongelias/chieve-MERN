@@ -44,7 +44,7 @@ function updateObjInArr(arr, obj) {
 ----------------------------------------*/
 function removeObjInArr(arr, obj) {
 	var id = obj._id;
-	console.log("updateObjInArr(" + id + ")");
+	console.log("removeObjInArr(" + id + ")");
 	var resultArr = arr;
 	var index = indexOfObjWithIdInArr(arr, id);
 
@@ -145,6 +145,37 @@ var DashboardApp = React.createClass({
 			body: JSON.stringify(obj)
 		});
 	},
+	removeTask: function(obj) {
+		var newTasks = removeObjInArr(this.state.taskList, obj);
+		console.log(newTasks);
+		this.setState({
+			taskList: newTasks
+		});
+
+		console.log(JSON.stringify(obj));
+		if(obj.completed) {
+			//Update DB
+			fetch('/api/tasks/' + obj._id, {
+				credentials: 'same-origin',
+				method: 'put',
+				headers: {
+					'Content-Type' : 'application/json',
+					'Accept' : 'application/json'
+				},
+				body: JSON.stringify(obj)
+			});
+		} else {
+			//Remove Task from DB
+			fetch('/api/tasks/' + obj._id, {
+				credentials: 'same-origin',
+				method: 'delete',
+				headers:{
+					'Content-Type' : 'application/json',
+					'Accept' : 'application/json'
+				}
+			});
+		}
+	},
 	render: function() {
 		return (
 			<div className={this.state.stateClass}>
@@ -162,7 +193,8 @@ var DashboardApp = React.createClass({
 									className="black-overlay-expanding circle"></div>
 							</div>
 							<TaskList tasks={this.state.taskList}
-								update={this.updateTask}/>
+								update={this.updateTask}
+								removeTask={this.removeTask}/>
 						</section>
 						<section className="objective-view">
 							<h1 className="text white objective-title margin-bottom-5">Objectives</h1>

@@ -19,9 +19,10 @@ var TaskList = React.createClass({
 					this.props.tasks.map(function(item, i){
 						return <Task 
 							task={item} 
-							key={item.id} 
+							key={item._id} 
 							order={i}
-							update={_this.props.update}/>
+							update={_this.props.update}
+							removeTask={_this.props.removeTask}/>
 					})
 				}
 			</div>

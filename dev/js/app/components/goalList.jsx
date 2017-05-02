@@ -15,7 +15,7 @@ var GoalList = React.createClass({
 					this.props.goals.map(function(item, i){
 						return <Goal 
 							goal={item} 
-							key={item.id} 
+							key={item._id} 
 							order={i} 
 							update={_this.props.update}/>
 					})

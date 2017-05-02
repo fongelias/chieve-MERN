@@ -487,6 +487,10 @@ body {
 			position: relative;
 		}
 
+		.item-completed .circle-option {
+			background-color: #bbef94;
+		}
+
 		/*-- Pseudo --*/
 		.more-options:hover .circle-option {
 			margin-bottom: 0.1rem;
@@ -578,6 +582,15 @@ body {
 	border-bottom: 2px solid #85888C;
 }
 
+	/*# JS applied states #*/
+	.item-completed .input-line {
+		border-bottom: 2px solid #bbef94;
+	}
+
+	.item-completed .input-line input {
+		color: #bbef94;
+	}
+
 	/* Used for inline input*/
 	.input-line.add-space {
 		margin-left: 1rem;
@@ -607,6 +620,11 @@ textarea.task-description {
 	font-size: 1.2rem;
 	font-family:  'OpenSans-Regular';
 }
+
+	/*# JS applied states #*/
+	.item-completed textarea.task-description {
+		border: 1px solid #bbef94;
+	}
 
 /*--- Components ---*/
 	/*--- Task List ---*/
@@ -657,13 +675,20 @@ textarea.task-description {
 		transition: all ease 1s;
 	}
 
+	/*-- Fade --*/
+	.fade {
+		opacity: 0;
+	}
+		.fade.transition {
+			opacity: 1;
+		}
 	/*-- Appear --*/
 	.appear {
 		display: none;
 		opacity: 0;
 	}
 
-		.transition {
+		.appear.transition {
 			display: initial;
 			opacity: 0;
 		}

@@ -126,6 +126,8 @@ exports.update = function(req, res) {
 $ curl -X DELETE localhost:1337/tasks/[id]
 */
 exports.delete = function(req, res) {
+	console.log('tasks.delete()');
+	console.log(req.task);
 	var task = req.task;
 	task.remove(function(err) {
 		if (err) {

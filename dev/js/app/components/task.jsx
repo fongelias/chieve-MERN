@@ -6,8 +6,6 @@ var Task = React.createClass({
 	getInitialState: function() {
 		return {
 			containerClass: 'inner-container',
-			title: this.props.task.title,
-			id: this.props.task._id
 		};
 	},
 	openOption: function() {
@@ -25,24 +23,42 @@ var Task = React.createClass({
 		}
 	},
 	updateTitle: function(e) {
-		this.setState({
-			title: e.target.value
-		})
-
 		this.props.update({
 			title: e.target.value,
-			_id: this.state.id
+			_id: this.props.task._id
 		})
 	},
 	updateDescription: function(e) {
-		this.setState({
-			description: e.target.value
-		})
-
 		this.props.update({
 			description: e.target.value,
-			_id: this.state.id
+			_id: this.props.task._id
 		})
+	},
+	removeTask: function() {
+		if(this.state.containerClass.split(" ").indexOf("open-option") != -1) {
+			var _this = this;
+			var confirmMessage = "Deleted tasks cannot be recovered! Press OK to continue."
+			if(confirm(confirmMessage)){
+				this.setState({
+					containerClass: 'inner-container item-completed fade transition ease'
+				})
+
+				//Fade from UI
+				setTimeout(function(){
+					_this.setState({
+						containerClass: 'inner-container item-completed ease fade'
+					})
+				}, 1000);
+
+				//Remove from State
+				setTimeout(function(){
+					_this.props.removeTask({
+						completed: false,
+						_id: _this.props.task._id
+					});
+				}, 3000);
+			}
+		}
 	},
 	render: function() {
 		return (
@@ -71,7 +87,7 @@ var Task = React.createClass({
 									<div className="inner-icon checkmark"></div>
 								</div>
 							</div>
-							<div className="option-container option-2">
+							<div className="option-container option-2" onClick={this.removeTask}>
 								<p>DEL</p>
 								<div className="circle-option">
 									<div className="inner-icon x-cross"></div>
