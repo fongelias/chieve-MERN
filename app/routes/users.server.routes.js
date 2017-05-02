@@ -22,6 +22,9 @@ module.exports = function(app) {
 	//Get to retrieve goals for a logged in user
 	app.route('/user/goals')
 		.get(users.requiresLogin, users.readGoals);
+	//Get to retrieve tasks for a logged in user
+	app.route('/user/tasks')
+		.get(users.requiresLogin, users.readTaskList);
 	//Get to retrieve registration page
 	//Post to register a user
 	app.route('/register')

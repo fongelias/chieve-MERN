@@ -35,12 +35,14 @@ var DashboardApp = React.createClass({
 
 		return {
 			stateClass: "",
-			goalList: []
+			goalList: [],
+			taskList: []
 		}
 	},
 	componentDidMount: function() {
 		var _this = this;
 
+		//Fetch GoalList and setState
 		fetch('/user/goals', {
 			credentials: 'same-origin',
 			headers: {
@@ -54,7 +56,24 @@ var DashboardApp = React.createClass({
 			_this.setState({
 				goalList: json
 			})
-		})
+		});
+
+		//Fetch TaskList and setState
+		fetch('user/tasks', {
+			credentials: 'same-origin',
+			headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json'
+			}
+		}).then(function(response) {
+			return response.json();
+		}).then(function(json) {
+			console.log(json);
+			_this.setState({
+				taskList: json
+			})
+		});
+
 	},
 	updateStateClass: function(classStr) {
 		this.setState({

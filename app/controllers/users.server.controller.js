@@ -4,6 +4,7 @@ var Goal = require('mongoose').model('Goal');
 var Task = require('mongoose').model('Task');
 var passport = require('passport');
 var parallel = require('async/parallel');
+var each = require('async/each');
 
 //Private Functions===========================================================
 /*X------XX------XX------XX------XX------XX------XX------XX------XX------X
@@ -55,6 +56,50 @@ exports.readGoals = function(req, res, next) {
 		} else {
 			console.log(goals);
 			res.json(goals);
+		}
+	});
+}
+
+
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
+//Return a user's goals
+exports.readTaskList = function(req, res, next) {
+	console.log('users.readTaskList()');
+	Goal.find({
+		'_id': {$in: req.user.currentGoals}
+	}, function(err, goals) {
+		if (err) {
+			return next(err);
+		} else {
+			var taskList = [];
+			each(goals, function(goal, callback) {
+				Task.find({
+					'goal': {$in: goal}
+				}, function(err, tasks) {
+					if(err) {
+						callback('Could not retrieve Tasks');
+					} else {
+						taskList = taskList.concat(tasks);
+						callback();
+					}
+				})
+			}, function(err) {
+				console.log('callback');
+				if (err) {
+					return next(err);
+				} else {
+					console.log(taskList);
+					res.json(taskList);
+				}
+			});
+			
 		}
 	});
 }
