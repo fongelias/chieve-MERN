@@ -240,6 +240,7 @@ exports.onboardRegister = function(req, res, next) {
 					    	for (i = 0; i < req.body.tasks.length; i++) {
 					    		var task = new Task();
 								task.goal = goal._id;
+								task.creator = user._id;
 								task.title = req.body.tasks[i];
 								task.save(function(err) {
 									if (err) {

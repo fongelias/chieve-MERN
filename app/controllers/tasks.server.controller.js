@@ -96,10 +96,17 @@ exports.taskByID = function(req, res, next, id) {
 curl -X PUT -H "Content-Type: application/json" -d '{"name": "UpdatedName"}' localhost:1337/tasks/[_id]
 */
 exports.update = function(req, res) {
+	console.log(req.task);
+	console.log(req.body);
+	console.log(req.body.title);
+	console.log(req.body.description);
 	var task = req.task;
-	task.title = req.body.title;
-	task.description = req.body.description;
-	task.completed = req.body.completed;
+	task.title = req.body.title ? req.body.title : task.title;
+	task.description = req.body.description ? req.body.description : task.description;
+	
+	if(req.body.completed) {
+		task.completed = Date.now();
+	}
 
 	task.save(function(err) {
 		if (err) {
