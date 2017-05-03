@@ -194,7 +194,8 @@ var DashboardApp = React.createClass({
 							</div>
 							<TaskList tasks={this.state.taskList}
 								update={this.updateTask}
-								removeTask={this.removeTask}/>
+								removeTask={this.removeTask}
+								showCompleted={true}/>
 						</section>
 						<section className="objective-view">
 							<h1 className="text white objective-title margin-bottom-5">Objectives</h1>

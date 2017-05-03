@@ -17,12 +17,23 @@ var TaskList = React.createClass({
 			<div className="task-list">
 				{
 					this.props.tasks.map(function(item, i){
-						return <Task 
-							task={item} 
-							key={item._id} 
-							order={i}
-							update={_this.props.update}
-							removeTask={_this.props.removeTask}/>
+						if(_this.props.showCompleted) {
+							return <Task 
+								task={item} 
+								key={item._id} 
+								order={i}
+								update={_this.props.update}
+								removeTask={_this.props.removeTask}/>
+						}
+						//Only show uncompleted items
+						if(!item.completed){
+							return <Task 
+								task={item} 
+								key={item._id} 
+								order={i}
+								update={_this.props.update}
+								removeTask={_this.props.removeTask}/>
+						}
 					})
 				}
 			</div>

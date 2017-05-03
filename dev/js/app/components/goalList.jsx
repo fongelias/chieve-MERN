@@ -13,11 +13,13 @@ var GoalList = React.createClass({
 			<div className="goal-list">
 				{
 					this.props.goals.map(function(item, i){
-						return <Goal 
-							goal={item} 
-							key={item._id} 
-							order={i} 
-							update={_this.props.update}/>
+						if(!item.completed){
+							return <Goal 
+								goal={item} 
+								key={item._id} 
+								order={i} 
+								update={_this.props.update}/>
+						}
 					})
 				}
 			</div>
