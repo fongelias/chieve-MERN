@@ -220,63 +220,59 @@ exports.onboardRegister = function(req, res, next) {
 						message: getErrorMessage(err)
 					});
 				} else {
-					parallel([
-					    function(callback) {
-					    	//Update User to reflect new goal
-					    	User.findByIdAndUpdate(
-								req.user._id,
-								{$push: {"currentGoals" : goal._id}},
-								{safe: true, upsert: true},
-							    function(err, model) {
-							        console.log(err);
-							        callback(err, true);
-							    }
-							);
-					    },
-					    function(callback) {
-					    	//Used to activate callback
-					    	var tasks_length = req.body.tasks.length;
-					    	//Create Tasks
-					    	for (i = 0; i < req.body.tasks.length; i++) {
-					    		var task = new Task();
-								task.goal = goal._id;
-								task.creator = user._id;
-								task.title = req.body.tasks[i];
-								task.save(function(err) {
-									if (err) {
-										console.log(err);
-										callback(err, true);
-									} else {
-										//Update Goal to reflect new task
-										Goal.findByIdAndUpdate(
-											goal._id,
-											{$push: {"tasks" : task._id}},
-											{safe: true, upsert: true},
-										    function(err, model) {
-										        console.log(err);
-										        tasks_length--;
-										        if (tasks_length == 0) {
-										        	callback(err, true);
-										        }
-										    }
-										);
-									}
+					//Update User to reflect new goal
+			    	User.findByIdAndUpdate(
+						req.user._id,
+						{$push: {"currentGoals" : goal._id}},
+						{safe: true, upsert: true},
+					    function(err, model) {
+					    	if (err) {
+						        console.log(err);
+						        return res.status(400).send({
+									message: getErrorMessage(err)
 								});
-					    	}
+						    }
 					    }
-					],
-					// optional callback
-					function(err, results) {
-					    // the results array will equal [true, true] if parallel functions worked
-					    if (results[0] && results[1]) {
-					    	return res.json({success: true, message: err, nextUrl: '/dashboard'});
-					    } else {
-					    	console.log(err);
-					    	return res.status(400).send({
+					);
+
+			    	//Create Tasks
+			    	each(req.body.tasks, function(taskTitle, callback) {
+			    		var task = new Task();
+			    		task.goal = goal._id;
+			    		task.creator = user._id;
+			    		task.title =  taskTitle;
+			    		task.save(function(err) {
+			    			if(err) {
+			    				console.log(err);
+			    				callback(err, true);
+			    			} else {
+			    				//Update Goal to reflect new task
+			    				Goal.findByIdAndUpdate(
+			    					goal._id,
+			    					{$push: {"tasks" : task._id}},
+			    					{safe: true, upsert: true},
+			    					function(err, model) {
+			    						console.log(err);
+			    						callback(); //An Error can be passed here
+			    					}
+			    				);
+			    			}
+			    		});
+			    	}, function(err) {
+			    		console.log('callback');
+			    		if(err) {
+			    			return next(err);
+			    			/*Alt return statement
+			    			return res.status(400).send({
 								message: getErrorMessage(err)
-							});
-					    }
-					});
+							});*/
+			    		} else {
+			    			return res.json({success: true, message: err, nextUrl: '/dashboard'});
+			    		}
+			    	});
+
+
+					    
 				}
 			});
 
@@ -287,7 +283,14 @@ exports.onboardRegister = function(req, res, next) {
 };
 
 
-
+/*X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ * VISUAL DELIMITER FOR A FUNCTION---XX------XX------XX------XX------XX---
+ *--X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X--
+ *-X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X--X----X-
+ *X------XX------XX------XX------XX------XX------XX------XX------XX------X
+ */
 //Uses OAuth to create new user
 exports.saveOAuthUserProfile = function(req, profile, done) {
 	User.findOne({
