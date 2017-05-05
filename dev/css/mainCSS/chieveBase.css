@@ -180,6 +180,12 @@ body {
 		     -o-transform: rotate(-45deg);
 	}
 
+		/*~~ Style Options ~~*/
+		.blackground .checkmark::after,
+		.blackground .checkmark::before {
+			background-color: #000000;
+		}
+
 	/*--- X-Cross ---*/
 	.x-cross {
 		height: 2rem;
@@ -213,6 +219,12 @@ body {
 		     -o-transform: rotate(-45deg);
 	}
 
+		/*~~ Style Options ~~*/
+		.blackground .x-cross::after,
+		.blackground .x-cross::before {
+			background-color: #000000;
+		}
+
 	/*--- Chevron ---*/
 	.chevron {
 		height: 2rem;
@@ -245,6 +257,12 @@ body {
 		   -moz-transform: rotate(-45deg);
 		     -o-transform: rotate(-45deg);
 	}
+
+		/*~~ Style Options ~~*/
+		.blackground .chevron::after,
+		.blackground .chevron::before {
+			background-color: #000000;
+		}
 
 	/*--- Scroll Down Arrow ---*/
 	.scroll-down-arrow {
@@ -479,6 +497,15 @@ body {
 		transition: all ease 0.3s;
 	}
 
+		/*~~ Style Options ~~*/
+		.blackground .more-options:hover .circle-option {
+			background-color: #FFFFFF;
+		}
+
+		.blackground .open-option .more-options .circle-option {
+			background-color: #cecfd1;
+		}
+
 		/*# JS applied states #*/
 		.open-option .more-options .circle-option {
 			height: 2rem;
@@ -520,7 +547,6 @@ body {
 		}
 
 			/*# JS applied states #*/
-
 			.open-option .more-options .circle-option .inner-icon {
 				opacity: 1;
 				/*animation*/
@@ -624,7 +650,8 @@ body {
 			text-align: left;
 		}
 
-textarea.task-description {
+textarea.task-description,
+textarea.goal-description {
 	outline: none;
 	resize: none;
 	height: 7.5rem;
@@ -633,29 +660,40 @@ textarea.task-description {
 	font-family:  'OpenSans-Regular';
 }
 
+	/*~~ Style Options ~~*/
+	.blackground textarea {
+		background-color: #000000;
+		color: #ffffff;
+	}
+
 	/*# JS applied states #*/
-	.item-completed textarea.task-description {
+	.item-completed textarea.task-description,
+	.item-completed textarea.goal-description {
 		border: 1px solid #bbef94;
 	}
 
-	.item-deleted textarea.task-description {
+	.item-deleted textarea.task-description,
+	.item-deleted textarea.goal-description {
 		border: 1px solid #ff9f9f;
 	}
 
 /*--- Components ---*/
-	/*--- Task List ---*/
-	.task-list {
+	/*--- Task/Goal List ---*/
+	.task-list,
+	.goal-list {
 		width: 40rem;
 	}
 
 	/*--- Task ---*/
-	.task-container > .inner-container {
+	.task-container > .inner-container,
+	.goal-container > .inner-container {
 		position: relative;
 		width: 40rem;
 		padding-top: 1rem;
 	}
 
-	.task-container .inner-container .more-options {
+	.task-container .inner-container .more-options,
+	.goal-container .inner-container .more-options {
 		position: absolute;
 		top: 1rem;
 		right: 0rem;
