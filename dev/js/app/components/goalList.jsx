@@ -18,7 +18,8 @@ var GoalList = React.createClass({
 								goal={item} 
 								key={item._id} 
 								order={i} 
-								update={_this.props.update}/>
+								update={_this.props.update}
+								removeGoal={_this.props.removeGoal}/>
 						}
 						//Only show uncompleted items
 						if(!item.completed){
@@ -26,7 +27,8 @@ var GoalList = React.createClass({
 								goal={item} 
 								key={item._id} 
 								order={i} 
-								update={_this.props.update}/>
+								update={_this.props.update}
+								removeGoal={_this.props.removeGoal}/>
 						}
 					})
 				}

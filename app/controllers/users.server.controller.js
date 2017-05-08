@@ -3,7 +3,6 @@ var User = require('mongoose').model('User');
 var Goal = require('mongoose').model('Goal');
 var Task = require('mongoose').model('Task');
 var passport = require('passport');
-var parallel = require('async/parallel');
 var each = require('async/each');
 
 //Private Functions===========================================================

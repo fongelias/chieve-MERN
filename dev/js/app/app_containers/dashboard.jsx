@@ -3,6 +3,8 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var TaskList = require('../components/taskList.jsx');
 var GoalList = require('../components/goalList.jsx');
+var AddButton = require('../components/buttons/addButton.jsx');
+var AddTaskForm = require('../components/addTaskForm.jsx')
 
 //Helper Functions
 /*----------------------------------------
@@ -102,7 +104,6 @@ var DashboardApp = React.createClass({
 				taskList: json
 			})
 		});
-
 	},
 	updateStateClass: function(classStr) {
 		this.setState({
@@ -126,6 +127,42 @@ var DashboardApp = React.createClass({
 			},
 			body: JSON.stringify(obj)
 		});
+	},
+	removeGoal: function(obj) {
+		var _this = this;
+		var newGoals = removeObjInArr(this.state.goalList, obj);
+		console.log(newGoals);
+		this.setState({
+			goalList: newGoals
+		});
+
+		console.log(JSON.stringify(obj));
+		if(obj.completed) {
+			//Update DB
+			fetch('/api/goals/' + obj._id, {
+				credentials: 'same-origin',
+				method: 'put',
+				headers: {
+					'Content-Type' : 'application/json',
+					'Accept' : 'application/json'
+				},
+				body: JSON.stringify(obj)
+			}).then(function(response) {
+				_this.updateStateFromDB();
+			});
+		} else {
+			//Remove Task from DB
+			fetch('/api/goals/' + obj._id, {
+				credentials: 'same-origin',
+				method: 'delete',
+				headers:{
+					'Content-Type' : 'application/json',
+					'Accept' : 'application/json'
+				}
+			}).then(function(response){
+				_this.updateStateFromDB();
+			});
+		}
 	},
 	updateTask: function(obj) {
 		var newTasks = updateObjInArr(this.state.taskList, obj);
@@ -176,6 +213,44 @@ var DashboardApp = React.createClass({
 			});
 		}
 	},
+	updateStateFromDB: function() {
+		var _this = this;
+
+		//Fetch GoalList and setState
+		fetch('/user/goals', {
+			credentials: 'same-origin',
+			headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json'
+			}
+		}).then(function(response) {
+			return response.json();
+		}).then(function(json) {
+			console.log(json);
+			_this.setState({
+				goalList: json
+			})
+		});
+
+		//Fetch TaskList and setState
+		fetch('user/tasks', {
+			credentials: 'same-origin',
+			headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json'
+			}
+		}).then(function(response) {
+			return response.json();
+		}).then(function(json) {
+			console.log(json);
+			_this.setState({
+				taskList: json
+			})
+		});
+	},
+	openAddTask: function() {
+		console.log('openAddTask()');
+	},
 	render: function() {
 		return (
 			<div className={this.state.stateClass}>
@@ -195,7 +270,11 @@ var DashboardApp = React.createClass({
 							<TaskList tasks={this.state.taskList}
 								update={this.updateTask}
 								removeTask={this.removeTask}
-								showCompleted={true}/>
+								showCompleted={false}/>
+							<div className="flex vertical justify add-task-container">
+								<AddTaskForm goals={this.state.goalList}/>
+								<AddButton action={this.openAddTask}/>
+							</div>
 						</section>
 						<section className="objective-view">
 							<h1 className="text white objective-title margin-bottom-5">Objectives</h1>
@@ -205,7 +284,9 @@ var DashboardApp = React.createClass({
 								}.bind(this)} 
 								>Tasks</a>
 							<GoalList goals={this.state.goalList} 
-								update={this.updateGoal}/>
+								update={this.updateGoal}
+								removeGoal={this.removeGoal}
+								showCompleted={false}/>
 						</section>
 					</div>
 				</div>

@@ -30,6 +30,10 @@ view
 		opacity: 1;
 	}
 
+.add-task-container {
+	padding-top: 5rem;
+}
+
 /*--- Objective ---*/
 #dashboard-objective-overlay {
 	top: 14.5rem;

@@ -3,6 +3,7 @@ var Goal = require('mongoose').model('Goal');
 var User = require('mongoose').model('User');
 var Task = require('mongoose').model('Task');
 var passport = require('passport');
+var each = require('async/each');
 
 //Private Functions===========================================================
 var getErrorMessage = function(err) {
@@ -165,15 +166,54 @@ $ curl -X DELETE localhost:1337/goals/[id]
 */
 exports.delete = function(req, res) {
 	var goal = req.goal;
-	goal.remove(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: getErrorMessage(err)
-			});
-		} else {
-			res.json(goal);
+	//Remove goal from user
+	User.findByIdAndUpdate(
+		req.user._id,
+		{$pull: {"currentGoals": goal._id}},
+		{safe: true},
+		function(err, model) {
+			if (err) {
+				console.log(err);
+				return res.status(400).send({
+					message: getErrorMessage(err)
+				});
+			} else {
+				//Delete tasks
+				each(goal.tasks, function(task, callback) {
+					console.log("removing task where id = " + task)
+					Task.remove(
+						{_id: task},
+						function(err) {
+							if(err) {
+								console.log(err);
+								callback(err);
+							} else {
+								callback();
+							}
+						}
+					)
+				}, function(err) {
+					if(err) {
+						console.log(err);
+						return res.status(400).send({
+							message: getErrorMessage(err)
+						});
+					} else {
+						//Delete Goal
+						goal.remove(function(err) {
+							if (err) {
+								return res.status(400).send({
+									message: getErrorMessage(err)
+								});
+							} else {
+								res.json(goal);
+							}
+						});
+					}
+				});
+			}
 		}
-	});
+	);
 };
 
 

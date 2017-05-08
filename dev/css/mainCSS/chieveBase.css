@@ -514,11 +514,13 @@ body {
 			position: relative;
 		}
 
-		.item-completed .circle-option {
+		.item-completed .circle-option,
+		.blackground .item-completed .circle-option {
 			background-color: #bbef94;
 		}
 
-		.item-deleted .circle-option {
+		.item-deleted .circle-option,
+		.blackground .item-deleted .circle-option{
 			background-color: #ff9f9f;
 		}
 

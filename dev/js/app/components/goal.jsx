@@ -37,13 +37,13 @@ var Goal = React.createClass({
 	completeGoal: function() {
 		console.log('goal.completeGoal()');
 		if(this.state.containerClass.split(" ").indexOf("open-option") != -1) {
-			this.removeGoal(false);
+			this.removeGoal(true);
 		}
 	},
 	deleteGoal: function() {
 		console.log('goal.deleteGoal()');
 		if(this.state.containerClass.split(" ").indexOf("open-option") != -1) {
-			this.removeTask(false);
+			this.removeGoal(false);
 		}
 	},
 	removeGoal: function(completedBool) {
@@ -68,9 +68,9 @@ var Goal = React.createClass({
 
 			//Remove from state
 			setTimeout(function() {
-				_this.props.removeTask({
+				_this.props.removeGoal({
 					completed: completedBool,
-					_id: _this.props.task._id
+					_id: _this.props.goal._id
 				})
 			}, 3000);
 		}

@@ -5,16 +5,21 @@
 Finished TODOS will be removed each month
 ### Features
 - [ ] Create a task in UI
+- [ ] Create a goal in UI
+- [ ] Show name of associated goal under task
 - [x] Goal React component
-- [ ] CRUD for goals in UI
-	- [ ] Deleting a goal should delete all associated tasks
-	- [ ] Completing a goal should update the associated user
+- [x] CRUD for goals in UI
+	- [x] Deleting a goal should delete all associated tasks
+	- [x] Completing a goal should update the associated user
 - [ ] Secure API routes torus/.env file/secrets
 - [ ] Social sharing
 - [ ] Search Goals
 - [ ] Set Permissions
 - [ ] UI Small Screen CSS
 	- [ ] Landing Page
+- [ ] Terms and Conditions/Privacy Policy checkbox
+- [ ] Sign Out Button
+
 
 ### Bugs
 - [x] Creating a goal with a set of tasks associates the goal with the same task multiple times
