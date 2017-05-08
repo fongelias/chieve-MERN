@@ -34,6 +34,77 @@ view
 	padding-top: 5rem;
 }
 
+.add-task-form {
+	border: 0px solid #d7d7d7;
+	padding: 0rem;
+	margin-bottom: 0rem;
+	opacity: 0;
+	height: 0rem;
+	overflow: hidden;
+	/*animation*/
+	transition-timing-function: all 0.5s ease 0.5s;
+	-webkit-transition: all 0.5s ease 0.5s; /* Safari */
+	transition: all 0.5s ease 0.5s;
+}
+
+	/*# JS applied states #*/
+	.add-task-form.open {
+		border: 1px solid #d7d7d7;
+		padding: 2rem;
+		margin-bottom: 2rem;
+		opacity: 1;
+		height: 10rem;
+	}
+
+/*--- Add new form ---*/
+.add-task-form select {
+	margin-top: 2rem;
+}
+
+/*--- Add Button Drawer ---*/
+.add-button-drawer {
+	width: 100%;
+	position: relative;
+	height: 3.9rem;
+	padding-bottom: calc(3.9rem * 2);
+	/*animation*/
+	transition-timing-function: all ease 0.5s;
+	-webkit-transition: all ease 0.5s; /* Safari */
+	transition: all ease 0.5s;
+}
+
+	.add-button-drawer .add-button {
+		position: absolute;
+		left: calc((100% - 3.9rem) / 2);
+		/*animation*/
+		transition-timing-function: all ease 0.5s;
+		-webkit-transition: all ease 0.5s; /* Safari */
+		transition: all ease 0.5s;
+	}
+
+		.add-button-drawer .add-button.one {
+			opacity: 0;
+		}
+
+	/*# JS applied states #*/
+	.add-button-drawer.two-options .add-button.one{
+		left: calc((100% - (3.9rem * 3)) / 2);
+		opacity: 1;
+	}
+
+	.add-button-drawer.two-options .add-button.two{
+		left: calc((100% + (3.9rem)) / 2);
+		/*animation*/
+		-webkit-transform: rotate(45deg);
+	   	   -moz-transform: rotate(45deg);
+	         -o-transform: rotate(45deg);
+	}
+
+		.add-button-drawer.two-options .add-button.two:hover {
+			background-color: #ff9f9f;
+			border: 2px solid #ff9f9f;
+		}
+
 /*--- Objective ---*/
 #dashboard-objective-overlay {
 	top: 14.5rem;

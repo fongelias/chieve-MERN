@@ -3,7 +3,6 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var TaskList = require('../components/taskList.jsx');
 var GoalList = require('../components/goalList.jsx');
-var AddButton = require('../components/buttons/addButton.jsx');
 var AddTaskForm = require('../components/addTaskForm.jsx')
 
 //Helper Functions
@@ -248,8 +247,20 @@ var DashboardApp = React.createClass({
 			})
 		});
 	},
-	openAddTask: function() {
-		console.log('openAddTask()');
+	addTask: function(obj) {
+		var _this = this;
+		//Update DB
+		fetch('/api/tasks/', {
+			credentials: 'same-origin',
+			method: 'post',
+			headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json'
+			},
+			body: JSON.stringify(obj)
+		}).then(function(response){
+			_this.updateStateFromDB();
+		});
 	},
 	render: function() {
 		return (
@@ -271,10 +282,8 @@ var DashboardApp = React.createClass({
 								update={this.updateTask}
 								removeTask={this.removeTask}
 								showCompleted={false}/>
-							<div className="flex vertical justify add-task-container">
-								<AddTaskForm goals={this.state.goalList}/>
-								<AddButton action={this.openAddTask}/>
-							</div>
+							<AddTaskForm goals={this.state.goalList}
+								addTask={this.addTask}/>
 						</section>
 						<section className="objective-view">
 							<h1 className="text white objective-title margin-bottom-5">Objectives</h1>
