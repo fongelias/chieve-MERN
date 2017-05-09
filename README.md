@@ -5,7 +5,7 @@
 Finished TODOS will be removed each month
 ### Features
 - [x] Create a task in UI
-- [ ] Create a goal in UI
+- [x] Create a goal in UI
 - [ ] Show name of associated goal under task
 - [ ] Show list of tasks under goal
 - [x] Goal React component
@@ -20,7 +20,7 @@ Finished TODOS will be removed each month
 - [ ] Search Goals
 - [ ] Set Permissions
 - [ ] UI Cross Browser Testing
-	- [x] Chrome
+	- [ ] Chrome (Main Focus Currently)
 	- [ ] Safari
 	- [ ] Firefox
 - [ ] UI Small Screen CSS
