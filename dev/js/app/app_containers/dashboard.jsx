@@ -316,6 +316,7 @@ var DashboardApp = React.createClass({
 						</section>
 					</div>
 				</div>
+				<a id="dashboard-sign-out-link" tabindex="-4" href="/logout">SIGN OUT</a>
 			</div>
 		)
 	}
