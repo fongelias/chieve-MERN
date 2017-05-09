@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
-var props = require('./env/chieveProps');
+var config = require('./config');
 
 //Exposed module
 module.exports = function() {
@@ -22,7 +22,7 @@ module.exports = function() {
 	app.use(session({
 		saveUninitialized: true,
 		resave: true,
-		secret: props.cookieSecret
+		secret: config.cookieSecret
 	}));
 
 	//Enable Connect-Flash for temporary messages in session object
