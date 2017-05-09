@@ -2,10 +2,16 @@ dev/js/lib
 
 dev/js/app/compiled_apps/
 
-public
-
 node_modules
 
 npm-debug.log
 
 .env
+
+public/css/
+
+public/fonts/
+
+public/js/
+
+public/img/
