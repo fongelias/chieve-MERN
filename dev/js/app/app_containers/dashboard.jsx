@@ -3,7 +3,8 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var TaskList = require('../components/taskList.jsx');
 var GoalList = require('../components/goalList.jsx');
-var AddTaskForm = require('../components/addTaskForm.jsx')
+var AddTaskForm = require('../components/addTaskForm.jsx');
+var AddGoalForm = require('../components/addGoalForm.jsx');
 
 //Helper Functions
 /*----------------------------------------
@@ -262,6 +263,21 @@ var DashboardApp = React.createClass({
 			_this.updateStateFromDB();
 		});
 	},
+	addGoal: function(obj) {
+		var _this = this;
+		//Update DB
+		fetch('/api/goals/', {
+			credentials: 'same-origin',
+			method: 'post',
+			headers: {
+				'Content-Type' : 'application/json',
+				'Accept' : 'application/json'
+			},
+			body: JSON.stringify(obj)
+		}).then(function(response) {
+			_this.updateStateFromDB();
+		});
+	},
 	render: function() {
 		return (
 			<div className={this.state.stateClass}>
@@ -296,6 +312,7 @@ var DashboardApp = React.createClass({
 								update={this.updateGoal}
 								removeGoal={this.removeGoal}
 								showCompleted={false}/>
+							<AddGoalForm addGoal={this.addGoal}/>
 						</section>
 					</div>
 				</div>

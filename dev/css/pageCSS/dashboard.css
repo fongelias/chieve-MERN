@@ -30,11 +30,13 @@ view
 		opacity: 1;
 	}
 
-.add-task-container {
+.add-task-container,
+.add-goal-container {
 	padding-top: 5rem;
 }
 
-.add-task-form {
+.add-task-form,
+.add-goal-form {
 	border: 0px solid #d7d7d7;
 	padding: 0rem;
 	margin-bottom: 0rem;
@@ -54,6 +56,14 @@ view
 		margin-bottom: 2rem;
 		opacity: 1;
 		height: 10rem;
+	}
+
+	.add-goal-form.open {
+		border: 1px solid #302f2f;
+		padding: 2rem;
+		margin-bottom: 2rem;
+		opacity: 1;
+		height: 5rem;
 	}
 
 /*--- Add new form ---*/
@@ -103,6 +113,24 @@ view
 		.add-button-drawer.two-options .add-button.two:hover {
 			background-color: #ff9f9f;
 			border: 2px solid #ff9f9f;
+		}
+	/*~~ Style Options ~~*/
+	.blackground .add-button-drawer .add-button {
+		border: 2px solid #85888C;
+	}
+
+		.blackground .add-button-drawer .add-button:hover {
+			background-color: #85888C;
+		}
+
+	.blackground .add-button-drawer .add-button .line-1,
+	.blackground .add-button-drawer .add-button .line-2 {
+		background-color: #85888C;
+	}
+
+		.blackground .add-button-drawer .add-button:hover .line-1,
+		.blackground .add-button-drawer .add-button:hover .line-2 {
+			background-color: #000000;
 		}
 
 /*--- Objective ---*/

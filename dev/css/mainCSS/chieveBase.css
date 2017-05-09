@@ -230,6 +230,7 @@ body {
 		.blackground .x-cross::after,
 		.blackground .x-cross::before {
 			background-color: #000000;
+			width: 0.45rem;
 		}
 
 	/*--- Chevron ---*/
