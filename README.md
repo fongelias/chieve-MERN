@@ -16,7 +16,7 @@ An example of populating a user's information would be the user dashboard, the f
 ![Dashboard](/screenshots/chieveDashboard.png)
 In our React app, we use the fetch API/Polyfill to update the state of the dashboard state container using two API routes, one that fetches the goal objects referenced by the user object, and the task objects referenced by the goal objects. While this is likely slower for a small amount of users, it should replace some forms of indexing on a larger scale.
 
-##UX/UI
+## UX/UI
 To make it easy to progress towards a goal, I made creating tasks frictionless, and their association with goals intuitive with a two-tab layout.
 
 To keep the UI simple, I collapsed actions a user could make into expandable elements that were clearly connected to their results. For example, to complete, delete, or edit the description of a task, a user clicks on an elipsis next to the title of the task.
